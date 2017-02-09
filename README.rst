@@ -51,13 +51,13 @@ Examples
 
 **Example 1**
 
-This will save the web page (www.foxnews.com) in the Internet Archive.
+To save the web page (www.foxnews.com) in the Internet Archive.
 
 .. code-block:: bash
       
       $ archivenow --ia www.foxnews.com
 
-***The output***
+*The output*
 
 .. code-block:: bash
       
@@ -66,17 +66,32 @@ This will save the web page (www.foxnews.com) in the Internet Archive.
 
 **Example 2**
 
-This will save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is).
+To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is).
 
 .. code-block:: bash
       
       $ archivenow --ia --is www.foxnews.com
       
-***The output***
+*The output*
 
 .. code-block:: bash
 
       ['https://web.archive.org/web/20170209140345/http://www.foxnews.com', 'http://archive.is/fPVyc']
+
+
+**Example 3**
+
+To save the web page (www.foxnews.com) in all configured web archives.
+
+.. code-block:: bash
+      
+      $ archivenow --all www.foxnews.com
+      
+*The output*
+
+.. code-block:: bash
+
+      ['https://web.archive.org/web/20170209140913/http://www.foxnews.com', 'http://archive.is/w6coU', 'http://www.webcitation.org/6o9IKD9FP']
 
 
 
