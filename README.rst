@@ -49,8 +49,8 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 Examples
 --------
 
-Example 1
-^^^^^^^^^
+- Example 1
+
 
 To save the web page (www.foxnews.com) in the Internet Archive:
 
