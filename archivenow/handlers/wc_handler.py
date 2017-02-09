@@ -46,7 +46,7 @@ class WC_handler(object):
 				return self.urim		
 		except Exception as e:
 			#logging.error(e)
-			print (e)
+			#print (e)
 			pass;
 		return None
 

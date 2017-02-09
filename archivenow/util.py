@@ -17,7 +17,7 @@ def sendGetRequest(url, stream=False, headers=''):
 		return r
 	except Exception as e:
 		#logging.error(e)
-		print (e)
+		#print (e)
 		pass;
 	return None
 
@@ -29,6 +29,6 @@ def sendPostRequest(uri, d, headers=''):
 		return r
 	except Exception as e:
 		#logging.error(e)
-		print (e)
+		#print (e)
 		pass;
 	return None

@@ -112,7 +112,7 @@ def pushit(tmp):
 	except Exception as e:
 		#print  strTprint+str(' 400')
 		#logging.error(e)
-		print (e)
+		#print (e)
 		pass;
 	return bad_request();
 
@@ -134,7 +134,7 @@ def push(URI,arc_id):
 		return res
 	except Exception as e:
 		#logging.error(e)
-		print (e)
+		#print (e)
 		pass;
 	return []
 
