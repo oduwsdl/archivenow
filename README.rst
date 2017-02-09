@@ -144,7 +144,7 @@ Python Usage
 
 .. code-block:: bash
    
-    >>> import archivenow
+    >>> from archivenow import archivenow
     
 - **Example 6**
 
