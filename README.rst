@@ -3,11 +3,11 @@ Archive Now (archivenow)
 A Tool To Push Web Resources Into Web Archives
 ---------------------------------------
 
-Archive Now (archivenow) currently is configured to push resources into three public web archives. You can easily add more archives by writing a new archive handler (e.g., ia_handler.py) and place it inside the folder "handlers".
+Archive Now (**archivenow**) currently is configured to push resources into three public web archives. You can easily add more archives by writing a new archive handler (e.g., ia_handler.py) and place it inside the folder "handlers".
 
 Installing
 ----------
-The latest release of archivenow can be installed using pip:
+The latest release of **archivenow** can be installed using pip:
 
 .. code-block:: bash
 
@@ -24,7 +24,7 @@ The latest development version containing changes not yet released can be instal
 
 USAGE
 -------------
-Usage of sub-commands in archivenow can be accessed through providing the `-h` or `--help` flag, like any of the below.
+Usage of sub-commands in **archivenow** can be accessed through providing the `-h` or `--help` flag, like any of the below.
 
 .. code-block:: bash
 
@@ -100,7 +100,7 @@ To save the web page (www.foxnews.com) in all configured web archives:
 Server
 --------
 
-You can run archivenow as a web service ( you can specify the port number using "--port #")
+You can run **archivenow** as a web service (you can specify the port number using the option "--port")
 
 .. code-block:: bash
       
@@ -113,6 +113,34 @@ You can run archivenow as a web service ( you can specify the port number using 
      2017-02-09 14:20:33
      Running on http://localhost:12345
      (Press CTRL+C to quit) 
+
+Example 4
+--------
+
+To save the web page (www.foxnews.com) in The Internet Archive through the web service:
+
+.. code-block:: bash
+      
+      $ curl -i http://localhost:12345/ia/www.foxnews.com
+      
+*The output*
+
+.. code-block:: bash
+
+      HTTP/1.0 200 OK
+      Content-Type: application/json
+      Content-Length: 95
+      Server: Werkzeug/0.11.15 Python/2.7.10
+      Date: Thu, 09 Feb 2017 14:29:23 GMT
+
+      {
+        "results": [
+          "https://web.archive.org/web/20170209142922/http://www.foxnews.com"
+        ]
+      }
+      
+      
+      
 
 License
 ---------
