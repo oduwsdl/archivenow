@@ -49,7 +49,8 @@ Usage of sub-commands in archivenow can be accessed through providing the `-h` o
 Examples
 --------
 
-**Example 1**
+Example 1
+********************
 
 To save the web page (www.foxnews.com) in the Internet Archive.
 
@@ -91,7 +92,7 @@ To save the web page (www.foxnews.com) in all configured web archives.
 
 .. code-block:: bash
 
-      ['https://web.archive.org/web/20170209140913/http://www.foxnews.com', 'http://archive.is/w6coU', 'http://www.webcitation.org/6o9IKD9FP']
+      ['https://web.archive.org/web/20170209140913/http://www.foxnews.com', 'http://archive.is/w6coU','http://www.webcitation.org/6o9IKD9FP']
 
 
 
