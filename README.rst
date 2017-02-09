@@ -182,8 +182,11 @@ Configuring a new archive or removing existing one
 Adding a new archive is as simple as adding a handler file in the folder "handlers". For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store it in the folder "handlers". The "ma" will be the archive identifier, so to push a web page (e.g., www.cnn.com) to this archive through the Python code, I should write ">>>archivenow.push("www.cnn.com","ma")". In the file "ma_handler.py", the name of the class must be "MA_handler". This class must have at least one function called "push" which has one argument. It might be helpful to see how other "*_handler.py" organized.
 
 Removing an archive can be done by one of the following options:
+
 - Removing the archive handler file from the folder "handlers"
+
 - Rename the archive handler file to other name that does not match end with "_handler.py"
+
 - Simply, inside the handler file, set the variable "enabled" to "False"
 
 
