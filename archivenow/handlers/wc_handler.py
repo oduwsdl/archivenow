@@ -2,7 +2,7 @@ import os
 import sys
 import random
 import string
-import logging
+#import logging
 
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
 
@@ -11,10 +11,10 @@ sys.path.append(PATH + '/..')
 from util import *
 
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    filename='/tmp/archivenow_debug.log',
-                    filemode='a')
+# logging.basicConfig(level=logging.DEBUG,
+#                     format='%(asctime)s %(levelname)s %(message)s',
+#                     filename='/tmp/archivenow_debug.log',
+#                     filemode='a')
 
 class WC_handler(object):
 
@@ -45,8 +45,10 @@ class WC_handler(object):
 				self.urim = 'http://www.webcitation.org/' + out.split('http://www.webcitation.org/')[1][0:9]
 				return self.urim		
 		except Exception as e:
-			logging.error(e)
-			return None
+			#logging.error(e)
+			print (e)
+			pass;
+		return None
 
 
 

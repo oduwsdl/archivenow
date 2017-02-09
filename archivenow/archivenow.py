@@ -2,7 +2,7 @@
 import os
 import re
 import sys
-import logging
+#import logging
 import fnmatch  
 import importlib
 import argparse	
@@ -21,10 +21,10 @@ PATH = str(os.path.dirname(os.path.abspath(__file__)))
 PATH_HANDLER = PATH + '/handlers/'
 
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    filename='/tmp/archivenow_debug.log',
-                    filemode='w')
+# logging.basicConfig(level=logging.DEBUG,
+#                     format='%(asctime)s %(levelname)s %(message)s',
+#                     filename='/tmp/archivenow_debug.log',
+#                     filemode='w')
 
 # for the web app
 app = Flask(__name__)
@@ -111,7 +111,8 @@ def pushit(tmp):
 			return resp;
 	except Exception as e:
 		print  strTprint+str(' 400')
-		logging.error(e)
+		#logging.error(e)
+		print (e)
 		pass;
 	return bad_request();
 
@@ -132,7 +133,8 @@ def push(URI,arc_id):
 					res.append(handlers[handler].urim)
 		return res
 	except Exception as e:
-		logging.error(e)
+		#logging.error(e)
+		print (e)
 		pass;
 	return []
 

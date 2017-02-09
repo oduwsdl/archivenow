@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 from bs4 import BeautifulSoup
-import logging
+#import logging
 
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
 
@@ -11,10 +11,10 @@ sys.path.append(PATH + '/..')
 from util import *
 
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    filename='/tmp/archivenow_debug.log',
-                    filemode='a')
+# logging.basicConfig(level=logging.DEBUG,
+#                     format='%(asctime)s %(levelname)s %(message)s',
+#                     filename='/tmp/archivenow_debug.log',
+#                     filemode='a')
 
 class IS_handler(object):
 
@@ -52,8 +52,10 @@ class IS_handler(object):
 							self.urim = r2.headers['Location']
 							return self.urim
 		except Exception as e:
-			logging.error(e)
-			return None
+			#logging.error(e)
+			print (e)
+			pass;
+		return None
 
 
 

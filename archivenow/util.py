@@ -1,12 +1,12 @@
 import requests
-import logging
+#import logging
 import os
 
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    filename='/tmp/archivenow_debug.log',
-                    filemode='a')
+# logging.basicConfig(level=logging.DEBUG,
+#                     format='%(asctime)s %(levelname)s %(message)s',
+#                     filename='/tmp/archivenow_debug.log',
+#                     filemode='a')
 
 
 # send http get request
@@ -16,8 +16,10 @@ def sendGetRequest(url, stream=False, headers=''):
 		r = requests.get(url, timeout=90, allow_redirects=True, stream=stream, headers=headers)
 		return r
 	except Exception as e:
-		logging.error(e)
-		return None
+		#logging.error(e)
+		print (e)
+		pass;
+	return None
 
 # send http post request
 def sendPostRequest(uri, d, headers=''):
@@ -26,5 +28,7 @@ def sendPostRequest(uri, d, headers=''):
 						 headers=headers)
 		return r
 	except Exception as e:
-		logging.error(e)
-		return None
+		#logging.error(e)
+		print (e)
+		pass;
+	return None
