@@ -67,13 +67,13 @@ def listArchives_server(handlers):
 # GET
 @app.route('/')
 def index():
-	strTprint = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' - '
-	strTprint += str(request.remote_addr) + ' - '
-	new_url = str(request.url).split(getServer_IP_PORT(),1)
-	if len(new_url) > 1:
-		strTprint += new_url[1] + ' - '
-	else:
-		strTprint += request.url + ' - '	
+	#strTprint = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' - '
+	#strTprint += str(request.remote_addr) + ' - '
+	#new_url = str(request.url).split(getServer_IP_PORT(),1)
+	#if len(new_url) > 1:
+	#	strTprint += new_url[1] + ' - '
+	#else:
+	#	strTprint += request.url + ' - '	
 	resp = jsonify(listArchives_server(handlers))
 	resp.status_code = 200	
 	#print  strTprint+str(' 200')
@@ -83,13 +83,13 @@ def index():
 @app.route('/<path:tmp>', methods=['GET'])
 def pushit(tmp):
 	try:
-		strTprint = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' - '
-		strTprint += str(request.remote_addr) + ' - '
-		new_url = str(request.url).split(getServer_IP_PORT(),1)
-		if len(new_url) > 1:
-			strTprint += new_url[1] + ' - '
-		else:
-			strTprint += request.url + ' - '
+		#strTprint = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + ' - '
+		#strTprint += str(request.remote_addr) + ' - '
+		#new_url = str(request.url).split(getServer_IP_PORT(),1)
+		#if len(new_url) > 1:
+		#	strTprint += new_url[1] + ' - '
+		#else:
+		#	strTprint += request.url + ' - '
 
 		allurl = str(request.url)
 		s = allurl.split(getServer_IP_PORT()+'/',1)[1].split('/',1)	
