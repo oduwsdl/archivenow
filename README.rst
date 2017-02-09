@@ -5,6 +5,11 @@ A Tool To Push Web Resources Into Web Archives
 
 Archive Now (**archivenow**) currently is configured to push resources into three public web archives. You can easily add more archives by writing a new archive handler (e.g., ia_handler.py) and place it inside the folder "handlers".
 
+As explained below, this library can be used through:
+- CLI
+- Web Service
+- Python
+
 Installing
 ----------
 The latest release of **archivenow** can be installed using pip:
@@ -22,7 +27,7 @@ The latest development version containing changes not yet released can be instal
       $ pip install -r requirements.txt
       $ pip install ./
 
-USAGE
+CLI USAGE
 -------------
 Usage of sub-commands in **archivenow** can be accessed through providing the `-h` or `--help` flag, like any of the below.
 
