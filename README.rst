@@ -49,7 +49,8 @@ Usage of sub-commands in archivenow can be accessed through providing the `-h` o
 Examples
 --------
 
-### Example 1
+Example 1
+--
 
 .. code-block:: bash
      $ on_demand www.foxnews.com --ia 
