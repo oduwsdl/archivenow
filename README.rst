@@ -49,7 +49,7 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 Examples
 --------
 
-- Example 1
+- **Example 1**
 
 
 To save the web page (www.foxnews.com) in the Internet Archive:
@@ -65,8 +65,7 @@ To save the web page (www.foxnews.com) in the Internet Archive:
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
 
-Example 2
---------
+- **Example 2**
 
 To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is):
 
@@ -81,8 +80,7 @@ To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and
       ['https://web.archive.org/web/20170209140345/http://www.foxnews.com', 'http://archive.is/fPVyc']
 
 
-Example 3
---------
+- **Example 3**
 
 To save the web page (www.foxnews.com) in all configured web archives:
 
@@ -114,8 +112,7 @@ You can run **archivenow** as a web service (you can specify the port number usi
      Running on http://localhost:12345
      (Press CTRL+C to quit) 
 
-Example 4
---------
+- **Example 4**
 
 To save the web page (www.foxnews.com) in The Internet Archive through the web service:
 
@@ -139,8 +136,7 @@ To save the web page (www.foxnews.com) in The Internet Archive through the web s
         ]
       }
       
-Example 4
---------
+- **Example 5**
 
 To save the web page (www.foxnews.com) in all configured archives though the web service:
 
