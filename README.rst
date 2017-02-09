@@ -50,25 +50,23 @@ Examples
 --------
 
 Example 1
---------
+~~~~~~~~~~~~~~~~~~~~
+
+This will save the web page (www.foxnews.com) in the Internet Archive.
 
 .. code-block:: bash
       
-      $ on_demand www.foxnews.com --ia 
+      $ archivenow --ia www.foxnews.com
 
 The output
 
 .. code-block:: bash
       
-      https://web.archive.org/web/20170202064016/http://www.foxnews.com
+      ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
 
 
 
-
-
-
-This will save the web page (www.foxnews.com) in the Internet Archive. The link to the archived version is (https://web.archive.org/web/20170202064016/http://www.foxnews.com).
 
 ### Example 2
 ```bash
