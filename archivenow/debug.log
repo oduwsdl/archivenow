@@ -1,0 +1,4 @@
+2017-02-09 11:53:07,196 DEBUG Starting new HTTPS connection (1): web.archive.org
+2017-02-09 11:53:10,944 DEBUG https://web.archive.org:443 "GET /save/www.cnn.com HTTP/1.1" 502 None
+2017-02-09 11:53:13,159 DEBUG Starting new HTTPS connection (1): web.archive.org
+2017-02-09 11:53:17,356 DEBUG https://web.archive.org:443 "GET /save/www.cnn.com HTTP/1.1" 200 138299

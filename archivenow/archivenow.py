@@ -145,6 +145,7 @@ def start(port=SERVER_PORT):
 
 def load_handlers():
 	global handlers
+	handlers = {}
 	# add the path of the handlers to the system so they can be imported
 	#sys.path.insert(0, PATH_HANDLER)
 	sys.path.append(PATH_HANDLER)
