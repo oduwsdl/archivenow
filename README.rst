@@ -50,7 +50,7 @@ Examples
 --------
 
 Example 1
---------
+^^^^^^^^^
 
 To save the web page (www.foxnews.com) in the Internet Archive:
 
@@ -139,8 +139,35 @@ To save the web page (www.foxnews.com) in The Internet Archive through the web s
         ]
       }
       
+Example 4
+--------
+
+To save the web page (www.foxnews.com) in all configured archives though the web service:
+
+.. code-block:: bash
       
+      $ curl -i http://localhost:12345/all/www.foxnews.com
       
+*The output*
+
+.. code-block:: bash
+
+      HTTP/1.0 200 OK
+      Content-Type: application/json
+      Content-Length: 172
+      Server: Werkzeug/0.11.15 Python/2.7.10
+      Date: Thu, 09 Feb 2017 14:33:47 GMT
+
+      {
+        "results": [
+          "https://web.archive.org/web/20170209143327/http://www.foxnews.com", 
+          "http://archive.is/H2Yfg", 
+          "http://www.webcitation.org/6o9Jubykh"
+        ]
+      }    
+      
+
+
 
 License
 ---------
