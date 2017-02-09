@@ -10,7 +10,7 @@ from util import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename=PATH + '/../debug.log',
+                    filename='/tmp/archivenow_debug.log',
                     filemode='a')
 
 class IA_handler(object):
