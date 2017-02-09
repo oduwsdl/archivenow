@@ -40,7 +40,7 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 
       $ archivenow -h
       usage: archivenow [-h] [--ia] [--is] [--wc] [--all] [--server]
-                     [--port [PORT]]
+                     [--host [HOST]] [--port [PORT]]
                      [URI]
 
       positional arguments:
@@ -53,7 +53,8 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
         --wc           Use The WebCite Archive
         --all          Use all possible archives
         --server       Run archiveNow as a Web Service
-        --port [PORT]  port number to run a Web Service
+        --host [HOST]  The server address
+        --port [PORT]  The port number to run a Web Service
   
 Examples
 --------
@@ -91,14 +92,14 @@ To save the web page (www.foxnews.com) in all configured web archives:
 Server
 ------
 
-You can run **archivenow** as a web service (you can specify the port number using the option "--port")
+You can run **archivenow** as a web service. You can specify the server address and/or the port number (e.g., --host localhost  --port 11111)
 
 .. code-block:: bash
       
       $ archivenow --server
  
          2017-02-09 14:20:33
-         Running on http://localhost:12345
+         Running on http://0.0.0.0:12345
          (Press CTRL+C to quit) 
 
 - **Example 4**
@@ -107,7 +108,7 @@ To save the web page (www.foxnews.com) in The Internet Archive through the web s
 
 .. code-block:: bash
       
-      $ curl -i http://localhost:12345/ia/www.foxnews.com
+      $ curl -i http://0.0.0.0:12345/ia/www.foxnews.com
       
            HTTP/1.0 200 OK
            Content-Type: application/json
@@ -127,7 +128,7 @@ To save the web page (www.foxnews.com) in all configured archives though the web
 
 .. code-block:: bash
       
-      $ curl -i http://localhost:12345/all/www.foxnews.com
+      $ curl -i http://0.0.0.0:12345/all/www.foxnews.com
 
           HTTP/1.0 200 OK
           Content-Type: application/json
@@ -170,14 +171,14 @@ To save the web page (www.foxnews.com) in all configured archives:
       
 - **Example 8**
 
-To start the server from Python( a port number can be passed):
+To start the server from Python do the following. The server/port number can be passed (e.g, start(1111, 'localhost')):
 
 .. code-block:: bash
 
       >>> archivenow.start()
       
           2017-02-09 15:02:37
-          Running on http://localhost:12345
+          Running on http://0.0.0.0:12345
           (Press CTRL+C to quit)
 
 
