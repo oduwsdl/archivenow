@@ -1,17 +1,19 @@
-
+import os
 import sys
 import subprocess
 from bs4 import BeautifulSoup
 import logging
 
+PATH = str(os.path.dirname(os.path.abspath(__file__)))
+
 # to import util.py
-sys.path.append('../')
+sys.path.append(PATH + '/..')
 from util import *
 
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename='../debug.log',
+                    filename=PATH + '/../debug.log',
                     filemode='a')
 
 class IS_handler(object):

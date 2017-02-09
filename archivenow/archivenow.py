@@ -15,14 +15,15 @@ from time import gmtime, strftime
 
 # import archive handlers
 # this python library path
+PATH = str(os.path.dirname(os.path.abspath(__file__)))
 
 # the path to the handlers scripts
-PATH_HANDLER = 'handlers'
+PATH_HANDLER = PATH + '/handlers/'
 
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename='debug.log',
+                    filename=PATH+'/debug.log',
                     filemode='w')
 
 # for the web app
