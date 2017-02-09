@@ -1,0 +1,20 @@
+2017-02-09 14:29:20,647 INFO  * Running on http://localhost:12345/ (Press CTRL+C to quit)
+2017-02-09 14:29:40,596 INFO 127.0.0.1 - - [09/Feb/2017 14:29:40] "GET / HTTP/1.1" 200 -
+2017-02-09 14:29:40,757 ERROR list index out of range
+2017-02-09 14:29:40,757 INFO 127.0.0.1 - - [09/Feb/2017 14:29:40] "GET /favicon.ico HTTP/1.1" 400 -
+2017-02-09 14:29:45,621 DEBUG Starting new HTTPS connection (1): web.archive.org
+2017-02-09 14:29:45,621 DEBUG Starting new HTTPS connection (1): web.archive.org
+2017-02-09 14:29:47,722 DEBUG https://web.archive.org:443 "GET /save/http://www.cs.odu.edu/~maturban/ HTTP/1.1" 200 15035
+2017-02-09 14:29:48,029 DEBUG Starting new HTTP connection (1): archive.is
+2017-02-09 14:29:48,147 DEBUG https://web.archive.org:443 "GET /save/http://www.cs.odu.edu/~maturban/ HTTP/1.1" 200 15035
+2017-02-09 14:29:48,314 DEBUG http://archive.is:80 "POST /submit/ HTTP/1.1" 200 240
+2017-02-09 14:29:48,361 DEBUG Starting new HTTP connection (1): archive.is
+2017-02-09 14:29:48,362 DEBUG Starting new HTTP connection (1): www.webcitation.org
+2017-02-09 14:29:48,534 DEBUG http://archive.is:80 "POST /submit/ HTTP/1.1" 200 240
+2017-02-09 14:29:48,539 DEBUG Starting new HTTP connection (1): www.webcitation.org
+2017-02-09 14:29:48,799 DEBUG http://www.webcitation.org:80 "POST /archive HTTP/1.1" 200 None
+2017-02-09 14:29:48,971 DEBUG http://www.webcitation.org:80 "POST /archive HTTP/1.1" 200 None
+2017-02-09 14:29:52,538 INFO 127.0.0.1 - - [09/Feb/2017 14:29:52] "GET /all/http://www.cs.odu.edu/~maturban/ HTTP/1.1" 200 -
+2017-02-09 14:29:52,567 ERROR list index out of range
+2017-02-09 14:29:52,568 INFO 127.0.0.1 - - [09/Feb/2017 14:29:52] "GET /favicon.ico HTTP/1.1" 400 -
+2017-02-09 14:29:52,602 INFO 127.0.0.1 - - [09/Feb/2017 14:29:52] "GET /all/http://www.cs.odu.edu/~maturban/ HTTP/1.1" 200 -

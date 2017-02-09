@@ -31,7 +31,12 @@ setup(
         'requests',
         'bs4'
     ],
-entry_points='''
+    package_data={
+        'archivenow': [
+            'handlers/*.*'
+          ]
+    },
+    entry_points='''
         [console_scripts]
         archivenow=archivenow.archivenow:args_parser
     '''   
