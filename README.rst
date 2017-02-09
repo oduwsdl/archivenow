@@ -51,17 +51,11 @@ Examples
 
 - **Example 1**
 
-
 To save the web page (www.foxnews.com) in the Internet Archive:
 
 .. code-block:: bash
-      
+
       $ archivenow --ia www.foxnews.com
-
-*The output*
-
-.. code-block:: bash
-      
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
 
@@ -72,11 +66,6 @@ To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and
 .. code-block:: bash
       
       $ archivenow --ia --is www.foxnews.com
-      
-*The output*
-
-.. code-block:: bash
-
       ['https://web.archive.org/web/20170209140345/http://www.foxnews.com', 'http://archive.is/fPVyc']
 
 
@@ -87,12 +76,7 @@ To save the web page (www.foxnews.com) in all configured web archives:
 .. code-block:: bash
       
       $ archivenow --all www.foxnews.com
-      
-*The output*
-
-.. code-block:: bash
-
-      ['https://web.archive.org/web/20170209140913/http://www.foxnews.com', 'http://archive.is/w6coU','http://www.webcitation.org/6o9IKD9FP']
+      ['https://web.archive.org/web/20170209140913/http://www.foxnews.com','http://archive.is/w6coU','http://www.webcitation.org/6o9IKD9FP']
 
 
 Server
@@ -103,14 +87,10 @@ You can run **archivenow** as a web service (you can specify the port number usi
 .. code-block:: bash
       
       $ archivenow --server
-      
-*The output*
-
-.. code-block:: bash
-
-     2017-02-09 14:20:33
-     Running on http://localhost:12345
-     (Press CTRL+C to quit) 
+ 
+         2017-02-09 14:20:33
+         Running on http://localhost:12345
+         (Press CTRL+C to quit) 
 
 - **Example 4**
 
@@ -120,21 +100,17 @@ To save the web page (www.foxnews.com) in The Internet Archive through the web s
       
       $ curl -i http://localhost:12345/ia/www.foxnews.com
       
-*The output*
+           HTTP/1.0 200 OK
+           Content-Type: application/json
+           Content-Length: 95
+           Server: Werkzeug/0.11.15 Python/2.7.10
+           Date: Thu, 09 Feb 2017 14:29:23 GMT
 
-.. code-block:: bash
-
-      HTTP/1.0 200 OK
-      Content-Type: application/json
-      Content-Length: 95
-      Server: Werkzeug/0.11.15 Python/2.7.10
-      Date: Thu, 09 Feb 2017 14:29:23 GMT
-
-      {
-        "results": [
-          "https://web.archive.org/web/20170209142922/http://www.foxnews.com"
-        ]
-      }
+          {
+            "results": [
+              "https://web.archive.org/web/20170209142922/http://www.foxnews.com"
+            ]
+          }
       
 - **Example 5**
 
@@ -143,26 +119,57 @@ To save the web page (www.foxnews.com) in all configured archives though the web
 .. code-block:: bash
       
       $ curl -i http://localhost:12345/all/www.foxnews.com
+
+          HTTP/1.0 200 OK
+          Content-Type: application/json
+          Content-Length: 172
+          Server: Werkzeug/0.11.15 Python/2.7.10
+          Date: Thu, 09 Feb 2017 14:33:47 GMT
+
+          {
+            "results": [
+              "https://web.archive.org/web/20170209143327/http://www.foxnews.com", 
+              "http://archive.is/H2Yfg", 
+              "http://www.webcitation.org/6o9Jubykh"
+            ]
+          }    
       
-*The output*
+Python Usage
+--------
+
+.. code-block:: bash
+   
+    >>> import archivenow
+    
+- **Example 6**
+
+To save the web page (www.foxnews.com) in The WebCite Archive:
 
 .. code-block:: bash
 
-      HTTP/1.0 200 OK
-      Content-Type: application/json
-      Content-Length: 172
-      Server: Werkzeug/0.11.15 Python/2.7.10
-      Date: Thu, 09 Feb 2017 14:33:47 GMT
+      >>> archivenow.push("www.foxnews.com","wc")
+      ['http://www.webcitation.org/6o9LTiDz3']
 
-      {
-        "results": [
-          "https://web.archive.org/web/20170209143327/http://www.foxnews.com", 
-          "http://archive.is/H2Yfg", 
-          "http://www.webcitation.org/6o9Jubykh"
-        ]
-      }    
+- **Example 7**
+
+To save the web page (www.foxnews.com) in all configured archives:
+
+.. code-block:: bash
+
+      >>> archivenow.push("www.foxnews.com","all")
+      ['https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV']
       
+- **Example 8**
 
+To start the server from Python( a port number can be passed):
+
+.. code-block:: bash
+
+      >>> archivenow.start()
+      
+          2017-02-09 15:02:37
+          Running on http://localhost:12345
+          (Press CTRL+C to quit)
 
 
 License
