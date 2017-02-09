@@ -193,3 +193,8 @@ Removing an archive can be done by one of the following options:
 - Rename the archive handler file to other name that does not end with "_handler.py"
 
 - Simply, inside the handler file, set the variable "enabled" to "False"
+
+
+Using this library
+------------------
+The public web archives, such as the Internet Archive, Archive Today, and WebCite might not like receiving too many requests from same clients, so try to use this library appropriately. If continuously requesting archiving the same web resource, the Internet Archive waits five minutes before creating a new archived copy while Archive Today waits two minutes.  
