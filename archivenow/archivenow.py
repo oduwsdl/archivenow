@@ -17,7 +17,7 @@ from time import gmtime, strftime
 # this python library path
 
 # the path to the handlers scripts
-PATH_HANDLER = '/handlers/'
+PATH_HANDLER = 'handlers'
 
 
 logging.basicConfig(level=logging.DEBUG,
