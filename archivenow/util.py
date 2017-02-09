@@ -2,11 +2,10 @@ import requests
 import logging
 import os
 
-PATH = str(os.path.dirname(os.path.abspath(__file__)))
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename=PATH + '/debug.log',
+                    filename='debug.log',
                     filemode='a')
 
 

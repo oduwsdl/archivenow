@@ -4,16 +4,15 @@ import random
 import string
 import logging
 
-PATH = str(os.path.dirname(os.path.abspath(__file__)))
 
 # to import util.py
-sys.path.append(PATH + '/..')
+sys.path.append('../')
 from util import *
 
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
-                    filename=PATH + '/../debug.log',
+                    filename='../debug.log',
                     filemode='a')
 
 class WC_handler(object):
