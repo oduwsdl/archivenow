@@ -185,7 +185,7 @@ Removing an archive can be done by one of the following options:
 
 - Removing the archive handler file from the folder "handlers"
 
-- Rename the archive handler file to other name that does not match end with "_handler.py"
+- Rename the archive handler file to other name that does not end with "_handler.py"
 
 - Simply, inside the handler file, set the variable "enabled" to "False"
 
