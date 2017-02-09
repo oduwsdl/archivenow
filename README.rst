@@ -1,7 +1,7 @@
 Archive Now (archivenow)
 =============================
 A Tool To Push Web Resources Into Web Archives
----------------------------------------
+----------------------------------------------
 
 Archive Now (**archivenow**) currently is configured to push resources into three public web archives. You can easily add more archives by writing a new archive handler (e.g., ia_handler.py) and place it inside the folder "handlers".
 
@@ -28,7 +28,7 @@ The latest development version containing changes not yet released can be instal
       $ pip install ./
 
 CLI USAGE
--------------
+---------
 Usage of sub-commands in **archivenow** can be accessed through providing the `-h` or `--help` flag, like any of the below.
 
 .. code-block:: bash
@@ -85,7 +85,7 @@ To save the web page (www.foxnews.com) in all configured web archives:
 
 
 Server
---------
+------
 
 You can run **archivenow** as a web service (you can specify the port number using the option "--port")
 
@@ -140,7 +140,7 @@ To save the web page (www.foxnews.com) in all configured archives though the web
           }    
       
 Python Usage
---------
+------------
 
 .. code-block:: bash
    
@@ -178,8 +178,8 @@ To start the server from Python( a port number can be passed):
 
 
 Configuring a new archive or removing existing one
----------
-Adding a new archive is as simple as adding a handler file in the folder "handlers". For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store it in the folder "handlers". The "ma" will be the archive identifier, so to push a web page (e.g., www.cnn.com) to this archive through the Python code, I should write ">>>archivenow.push("www.cnn.com","ma")". In the file "ma_handler.py", the name of the class must be "MA_handler". This class must have at least one function called "push" which has one argument. It might be helpful to see how other "*_handler.py" organized.
+--------------------------------------------------
+Adding a new archive is as simple as adding a handler file in the folder "handlers". For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store it in the folder "handlers". The "ma" will be the archive identifier, so to push a web page (e.g., www.cnn.com) to this archive through the Python code, I should write ">>>archivenow.push("www.cnn.com","ma")". In the file "ma_handler.py", the name of the class must be "MA_handler". This class must have at least one function called "push" which has one argument. It might be helpful to see how other "\*_handler.py" organized.
 
 Removing an archive can be done by one of the following options:
 
@@ -188,9 +188,3 @@ Removing an archive can be done by one of the following options:
 - Rename the archive handler file to other name that does not end with "_handler.py"
 
 - Simply, inside the handler file, set the variable "enabled" to "False"
-
-
-
-
-
-

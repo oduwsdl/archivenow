@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 long_description = open('README.rst').read()
 desc = """A simple Python library that can be used push web resources into public web archives"""
@@ -8,13 +8,13 @@ desc = """A simple Python library that can be used push web resources into publi
 
 setup(
     name='archivenow',
-    version='0.0.1',
+    version='0.0.2',
     description=desc,
     long_description=long_description,
     author='Mohamed Aturban',
     author_email='maturban@cs.odu.edu',
     url='https://github.com/maturban/archivenow',
-    packages=find_packages(),
+    packages=['archivenow'],
     include_package_data=True,
     license="MIT",
     classifiers=[
