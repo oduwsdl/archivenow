@@ -8,7 +8,7 @@ desc = """A simple Python library that can be used push web resources into publi
 
 setup(
     name='archivenow',
-    version='0.0.2',
+    version='0.0.0.1',
     description=desc,
     long_description=long_description,
     author='Mohamed Aturban',
