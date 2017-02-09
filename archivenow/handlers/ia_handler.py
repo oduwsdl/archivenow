@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 #import logging
 
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -20,26 +21,31 @@ class IA_handler(object):
 		self.name = 'The Internet Archive'
 		self.urim = None
 
-	def push(self, uri_org):	
-		try:
-			self.urim = None
-			uri = 'https://web.archive.org/save/' + uri_org
+	def push(self, uri_org):
+		# two tries in case the first request fails	
+		for x in range(0, 1):
+			try:
+				self.urim = None
+				uri = 'https://web.archive.org/save/' + uri_org
 
-			r = sendGetRequest(uri)
-			if (r != None):
-				if "Location" in r.headers:
-					self.urim = r.headers["Location"]
-					return self.urim
-				elif "Content-Location" in r.headers:
-					self.urim = "https://web.archive.org"+r.headers["Content-Location"]	
-					return self.urim
-				else:
-					for r2 in r.history:
-						if 'Location' in r2.headers:	
-							self.urim = r2.headers['Location']				
+				r = sendGetRequest(uri)
+				if (r != None):
+					if "Location" in r.headers:
+						self.urim = r.headers["Location"]
+						if self.urim[0:4] == "http":
 							return self.urim
-		except Exception as e:
-			#logging.error(e)
-			#print (e)
-			pass;
+					elif "Content-Location" in r.headers:
+						self.urim = "https://web.archive.org"+r.headers["Content-Location"]	
+						return self.urim
+					else:
+						for r2 in r.history:
+							if 'Location' in r2.headers:	
+								self.urim = r2.headers['Location']				
+								return self.urim
+			except Exception as e:
+				#logging.error(e)
+				#print (e)
+				pass;
+			time.sleep(3);	
+
 		return None

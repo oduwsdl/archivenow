@@ -34,7 +34,7 @@ global handlers
 handlers = {}
 
 # defult value for server/port
-SERVER_IP = 'localhost'
+SERVER_IP = '0.0.0.0'
 SERVER_PORT = 12345
 
 
@@ -138,11 +138,13 @@ def push(URI,arc_id):
 		pass;
 	return []
 
-def start(port=SERVER_PORT):
+def start(port=SERVER_PORT, host=SERVER_IP):
 	global SERVER_PORT
+	global SERVER_IP
 	SERVER_PORT = port
+	SERVER_IP = host
 	#print '\n'+strftime("%Y-%m-%d %H:%M:%S", gmtime()) + '\nRunning on '+getServer_IP_PORT()+'\n(Press CTRL+C to quit) \n'
-	app.run(host=SERVER_IP, port=port, threaded=True, debug=True, use_reloader=False)  
+	app.run(host=host, port=port, threaded=True, debug=True, use_reloader=False)  
 
 
 def load_handlers():
@@ -174,6 +176,7 @@ def load_handlers():
 
 def args_parser():
 	global SERVER_PORT 
+	global SERVER_IP
 	# parsing arguments 
 	class MyParser(argparse.ArgumentParser):
 	    def error(self, message):
@@ -203,7 +206,9 @@ def args_parser():
 
 		parser.add_argument('URI', nargs='?', help='URI of a web resource')
 
-		parser.add_argument('--port', nargs='?', help='port number to run a Web Service')
+		parser.add_argument('--host', nargs='?', help='The server address')		
+
+		parser.add_argument('--port', nargs='?', help='The port number to run a Web Service')
 
 		args=parser.parse_args()
 	else:
@@ -214,8 +219,10 @@ def args_parser():
 	if getattr(args, 'server'):
 		if getattr(args, 'port'):
 			SERVER_PORT = int(args.port)
+		if getattr(args, 'host'):
+			SERVER_IP = str(args.host)
 
-		start(port=SERVER_PORT)
+		start(port=SERVER_PORT, host=SERVER_IP)
 
 	else: 
 		if not getattr(args, 'URI'):
