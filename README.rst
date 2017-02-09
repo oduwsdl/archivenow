@@ -18,7 +18,7 @@ The latest development version containing changes not yet released can be instal
 .. code-block:: bash
       
       $ git clone git@github.com:maturban/archivenow.git
-      $ cd ipwb
+      $ cd archivenow
       $ pip install -r requirements.txt
       $ pip install ./
 
@@ -172,6 +172,9 @@ To start the server from Python( a port number can be passed):
           (Press CTRL+C to quit)
 
 
-License
+Configure a new archive (adding/removing archives)
 ---------
-MIT
+Adding a new archive is simply as adding a handler file in the folder "handlers". For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store in the folder "handlers". In the file "ma_handler.py", the class name must be "MA_handlar". This class must have at least one function called "push" which has one argument. It might be useful to how other *_handler.py organized.
+
+
+
