@@ -76,7 +76,7 @@ def index():
 		strTprint += request.url + ' - '	
 	resp = jsonify(listArchives_server(handlers))
 	resp.status_code = 200	
-	print  strTprint+str(' 200')
+	#print  strTprint+str(' 200')
 	return resp
 
 #POST
@@ -100,17 +100,17 @@ def pushit(tmp):
 		resp = {"results":push(URI, arc_id)}
 
 		if len(resp["results"]) == 0:
-			print  strTprint+str(' 400')
+			#print  strTprint+str(' 400')
 			return bad_request();
 		else:				
 		# what should be return
 			resp = jsonify(resp)
-			print  strTprint+str(' 200')
+			#print  strTprint+str(' 200')
 			resp.status_code = 200
 			#resp.headers['Location'] = getServer_IP_PORT()+ timeSpecificURI;	
 			return resp;
 	except Exception as e:
-		print  strTprint+str(' 400')
+		#print  strTprint+str(' 400')
 		#logging.error(e)
 		print (e)
 		pass;
@@ -141,7 +141,7 @@ def push(URI,arc_id):
 def start(port=SERVER_PORT):
 	global SERVER_PORT
 	SERVER_PORT = port
-	print '\n'+strftime("%Y-%m-%d %H:%M:%S", gmtime()) + '\nRunning on '+getServer_IP_PORT()+'\n(Press CTRL+C to quit) \n'
+	#print '\n'+strftime("%Y-%m-%d %H:%M:%S", gmtime()) + '\nRunning on '+getServer_IP_PORT()+'\n(Press CTRL+C to quit) \n'
 	app.run(host=SERVER_IP, port=port, threaded=True, debug=True, use_reloader=False)  
 
 
