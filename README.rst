@@ -49,8 +49,7 @@ Usage of sub-commands in archivenow can be accessed through providing the `-h` o
 Examples
 --------
 
-Example 1
-~~~~~~~~~~~~~~~~~~~~
+**Example 1**
 
 This will save the web page (www.foxnews.com) in the Internet Archive.
 
@@ -58,17 +57,34 @@ This will save the web page (www.foxnews.com) in the Internet Archive.
       
       $ archivenow --ia www.foxnews.com
 
-The output
+***The output***
 
 .. code-block:: bash
       
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
 
+**Example 2**
+
+This will save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is).
+
+.. code-block:: bash
+      
+      $ archivenow --ia --is www.foxnews.com
+      
+***The output***
+
+.. code-block:: bash
+
+      ['https://web.archive.org/web/20170209140345/http://www.foxnews.com', 'http://archive.is/fPVyc']
 
 
 
-### Example 2
+
+
+
+
+
 ```bash
 %python on_demand.py www.foxnews.com --archive_is
 ```
