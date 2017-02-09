@@ -50,9 +50,9 @@ Examples
 --------
 
 Example 1
-********************
+--------
 
-To save the web page (www.foxnews.com) in the Internet Archive.
+To save the web page (www.foxnews.com) in the Internet Archive:
 
 .. code-block:: bash
       
@@ -65,9 +65,10 @@ To save the web page (www.foxnews.com) in the Internet Archive.
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
 
-**Example 2**
+Example 2
+--------
 
-To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is).
+To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is):
 
 .. code-block:: bash
       
@@ -80,9 +81,10 @@ To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and
       ['https://web.archive.org/web/20170209140345/http://www.foxnews.com', 'http://archive.is/fPVyc']
 
 
-**Example 3**
+Example 3
+--------
 
-To save the web page (www.foxnews.com) in all configured web archives.
+To save the web page (www.foxnews.com) in all configured web archives:
 
 .. code-block:: bash
       
@@ -95,54 +97,22 @@ To save the web page (www.foxnews.com) in all configured web archives.
       ['https://web.archive.org/web/20170209140913/http://www.foxnews.com', 'http://archive.is/w6coU','http://www.webcitation.org/6o9IKD9FP']
 
 
+Server
+--------
 
+You can run archivenow as a web service ( you can specify the port number using "--port #")
 
+.. code-block:: bash
+      
+      $ archivenow --server
+      
+*The output*
 
+.. code-block:: bash
 
-
-
-```bash
-%python on_demand.py www.foxnews.com --archive_is
-```
-###### The output
-```
-http://archive.is/Z7eVp
-```
-This will save the web page (www.foxnews.com) in the Archive Today. The link to the archived version is (http://archive.is/hxpuZ).
-
-### Example 3
-```bash
-%python on_demand.py www.foxnews.com --webcite
-```
-###### The output
-```
-http://www.webcitation.org/6nyAzDqC1
-```
-This will save the web page (www.foxnews.com) in the WebCite archive. The link to the archived version is (http://www.webcitation.org/6nyAzDqC1).
-
-### Example 4
-```bash
-%python on_demand.py www.foxnews.com --webcite --ia
-```
-###### The output
-```
-https://web.archive.org/web/20170202064527/http://www.foxnews.com
-http://www.webcitation.org/6nyB5z4Iz
-```
-This will save the web page (www.foxnews.com) in both the WebCite archive and the Archive Today. The links to the archived versions are (http://www.webcitation.org/6nyB5z4Iz) and (https://web.archive.org/web/20170202064527/http://www.foxnews.com).
-
-
-### Example 5
-```bash
-%python on_demand.py www.foxnews.com --all
-```
-###### The output
-```
-https://web.archive.org/web/20170202065542/http://www.foxnews.com
-http://archive.is/c0vrF
-http://www.webcitation.org/6nyBlk1Ri
-```
-This will save the web page (www.foxnews.com) in all archives listed in the file "archives.conf".
+     2017-02-09 14:20:33
+     Running on http://localhost:12345
+     (Press CTRL+C to quit) 
 
 License
 ---------
