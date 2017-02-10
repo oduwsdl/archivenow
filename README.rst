@@ -195,6 +195,6 @@ Removing an archive can be done by one of the following options:
 - Simply, inside the handler file, set the variable "enabled" to "False"
 
 
-Using this library
-------------------
-The public web archives, such as the Internet Archive, Archive Today, and WebCite might not like receiving too many requests from same clients, so try to use this library appropriately. If continuously requesting archiving the same web resource, the Internet Archive waits five minutes before creating a new archived copy while Archive Today waits two minutes.  
+Notes
+-----
+The Internet Archive (IA) sets a time gap of al least two minutes between creating different copies of the 'same' resource. For example, if you send a request to the IA to capture (www.cnn.com) at 10:00pm. The IA will create a new copy (lets call it C1) of this CNN homepage. The IA will return (C1) for all requests to archive the CNN homepage recived before 10:02pm. The Archive Today sets this time gap to five minutes.  
