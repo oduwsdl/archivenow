@@ -52,7 +52,7 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
         --is           Use The Archive Today
         --wc           Use The WebCite Archive
         --all          Use all possible archives
-        --server       Run archiveNow as a Web Service
+        --server       Run archivenow as a Web Service
         --host [HOST]  The server address
         --port [PORT]  The port number to run a Web Service
   
