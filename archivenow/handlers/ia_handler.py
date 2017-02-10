@@ -42,7 +42,8 @@ class IA_handler(object):
 							if 'Location' in r2.headers:	
 								self.urim = r2.headers['Location']				
 								return self.urim
-			except Exception as e:
+			except: 
+			    #Exception as e:
 				#logging.error(e)
 				#print (e)
 				pass;

@@ -44,7 +44,8 @@ class WC_handler(object):
 				out = r.content 
 				self.urim = 'http://www.webcitation.org/' + out.split('http://www.webcitation.org/')[1][0:9]
 				return self.urim		
-		except Exception as e:
+		except:
+		    # Exception as e:
 			#logging.error(e)
 			#print (e)
 			pass;

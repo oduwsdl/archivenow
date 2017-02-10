@@ -1,6 +1,5 @@
 import os
 import sys
-import subprocess
 from bs4 import BeautifulSoup
 #import logging
 
@@ -25,19 +24,17 @@ class IS_handler(object):
 
 	def push(self, uri_org):	
 		try:
+
 			self.urim = None
 			archiveTodaySubmitId = ""
 			archiveTodayUserAgent = { "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" }	
-
+			
 			# get the newest submitid
-			cmd = (" curl -i http://archive.is/ ");
-			p = subprocess.Popen(cmd , shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-			out, err = p.communicate()
-			if len(out.rstrip())>10:
-				soup = BeautifulSoup(out, "html.parser")
-				archiveTodaySubmitId = soup.input['value']
+			rid = sendGetRequest('http://archive.is/', headers=archiveTodayUserAgent)
+			soup = BeautifulSoup(rid.content, "html.parser")
+			archiveTodaySubmitId = soup.input['value']
 
-			r = sendPostRequest('http://archive.is/submit/',{"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId}, archiveTodayUserAgent)
+			r = sendPostRequest('http://archive.is/submit/',{"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId}, headers=archiveTodayUserAgent)
 
 			if 'Refresh' in r.headers:
 				self.urim = str(r.headers['Refresh']).split(';url=')[1]
@@ -51,7 +48,8 @@ class IS_handler(object):
 						if 'Location' in r2.headers:
 							self.urim = r2.headers['Location']
 							return self.urim
-		except Exception as e:
+		except: 
+			#Exception as e:
 			#logging.error(e)
 			#print (e)
 			pass;
