@@ -3,12 +3,12 @@
 from setuptools import setup, find_packages
 
 long_description = open('README.rst').read()
-desc = """A simple Python library that can be used push web resources into public web archives"""
+desc = """A Python library to push web resources into public web archives"""
 
 
 setup(
     name='archivenow',
-    version='2017.02.09.23.40.22',
+    version='2017.02.09.23.50.30',
     description=desc,
     long_description=long_description,
     author='Mohamed Aturban',
@@ -22,13 +22,14 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',        
         'License :: OSI Approved :: MIT License'
     ],
     install_requires=[
         'flask',
-        'requests',
-        'bs4'
+        'requests'
     ],
     package_data={
         'archivenow': [

@@ -1,52 +1,28 @@
-import os
-import sys
-import time
-#import logging
-
-PATH = str(os.path.dirname(os.path.abspath(__file__)))
-
-# to import util.py
-sys.path.append(PATH + '/..')
-from util import *
-
-# logging.basicConfig(level=logging.DEBUG,
-#                     format='%(asctime)s %(levelname)s %(message)s',
-#                     filename='/tmp/archivenow_debug.log',
-#                     filemode='a')
+import requests
 
 class IA_handler(object):
 
-	def __init__(self):
-		self.enabled = True
-		self.name = 'The Internet Archive'
-		self.urim = None
+    def __init__(self):
+        self.enabled = True
+        self.name = 'The Internet Archive'
 
-	def push(self, uri_org):
-		# two tries in case the first request fails	
-		for x in range(0, 1):
-			try:
-				self.urim = None
-				uri = 'https://web.archive.org/save/' + uri_org
-
-				r = sendGetRequest(uri)
-				if (r != None):
-					if "Location" in r.headers:
-						self.urim = r.headers["Location"]
-						if self.urim[0:4] == "http":
-							return self.urim
-					elif "Content-Location" in r.headers:
-						self.urim = "https://web.archive.org"+r.headers["Content-Location"]	
-						return self.urim
-					else:
-						for r2 in r.history:
-							if 'Location' in r2.headers:	
-								self.urim = r2.headers['Location']				
-								return self.urim
-			except: 
-			    #Exception as e:
-				#logging.error(e)
-				#print (e)
-				pass;
-			time.sleep(3);	
-
-		return None
+    def push(self, uri_org):
+        try:
+            uri = 'https://web.archive.org/save/' + uri_org
+            # push into the archive
+            r = requests.get(uri, timeout=120, allow_redirects=True)
+            # extract the link to the archived copy
+            if (r != None):
+                if "Location" in r.headers:
+                    return r.headers["Location"]
+                elif "Content-Location" in r.headers:
+                    return "https://web.archive.org"+r.headers["Content-Location"]    
+                else:
+                    for r2 in r.history:
+                        if 'Location' in r2.headers:
+                            return r2.headers['Location']
+                        if 'Content-Location' in r2.headers:
+                            return r2.headers['Content-Location']
+        except Exception as e:
+            pass;  
+        return self.name+ ": Unexpected error"
