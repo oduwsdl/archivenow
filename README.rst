@@ -11,6 +11,8 @@ As explained below, this library can be used through:
 
 - Web Service
 
+- A Docker Container
+
 - Python
 
 
@@ -143,7 +145,18 @@ To save the web page (www.foxnews.com) in all configured archives though the web
               "http://www.webcitation.org/6o9Jubykh"
             ]
           }    
-      
+
+Running as a Docker Container
+-----------------------------
+
+.. code-block:: bash
+
+    $ docker pull maturban/archivenow
+    $ docker run maturban/archivenow -h
+    $ docker run -p 80:11111 maturban/archivenow --server --port 11111
+    $ docker run maturban/archivenow --ia http://www.cnn.com
+    
+
 Python Usage
 ------------
 
