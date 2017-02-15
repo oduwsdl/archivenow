@@ -7,6 +7,7 @@ import json
 import importlib
 import argparse	
 from flask import request, Flask, jsonify
+from __init__ import __version__ as archiveNowVersion
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -158,6 +159,10 @@ def args_parser():
         #arc_handler += 1
         parser.add_argument('--'+handler,  action='store_true', default=False, 
    	                        help='Use '+handlers[handler].name)
+    parser.add_argument(
+        '-v', '--version', help='Report the version of archivenow', action='version',
+        version='ArchiveNow ' + archiveNowVersion)
+            
     if len(handlers) > 0:
         parser.add_argument('--all',  action='store_true', default=False, 
                              help='Use all possible archives ')
