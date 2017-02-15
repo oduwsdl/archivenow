@@ -7,10 +7,12 @@ class IA_handler(object):
         self.name = 'The Internet Archive'
 
     def push(self, uri_org):
+        msg = ''
         try:
             uri = 'https://web.archive.org/save/' + uri_org
             # push into the archive
             r = requests.get(uri, timeout=120, allow_redirects=True)
+            r.raise_for_status()
             # extract the link to the archived copy
             if (r != None):
                 if "Location" in r.headers:
@@ -23,6 +25,9 @@ class IA_handler(object):
                             return r2.headers['Location']
                         if 'Content-Location' in r2.headers:
                             return r2.headers['Content-Location']
+            msg = "("+self.name+ "): No HTTP Location/Content-Location header is returned in the response"               
         except Exception as e:
-            pass;  
-        return self.name+ ": Unexpected error"
+            if msg == '':
+                msg = "Error (" + self.name+ "): " + str(e)
+            pass;      
+        return msg

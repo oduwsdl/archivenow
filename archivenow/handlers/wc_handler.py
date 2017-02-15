@@ -23,16 +23,46 @@ class WC_handler(object):
             return ''.join(random.choice(letters) for i in range(length))
         return [get_random_name(letters, length) + '@' + get_random_domain(domains) for i in range(nb)][0]
 
+    def page_exists_in_wc(self,urim):
+        try:
+            r = requests.get(urim, timeout=180, 
+                            allow_redirects=True)                  
+
+            r2 = requests.get('http://www.webcitation.org/mainframe.php', timeout=180, cookies=r.cookies,
+                            allow_redirects=True)  
+
+            if ("When WebCite tried to archive the page, it received a Page Not Found error" in r2.text):   
+                return False
+            else:
+                return True    
+        except:
+            pass;
+        return False        
+
+
     def push(self, uri_org):
+        msg = ''
         try:
             # push to the archive
             r = requests.post('http://www.webcitation.org/archive', timeout=180, 
                                                                     data={'url':uri_org, 'email':self.generate_random_email()}, 
                                                                     allow_redirects=True)
+            r.raise_for_status()
             # extract the link to the archived copy
             if (r != None):
-                out = r.text 
-                return 'http://www.webcitation.org/' + out.split('http://www.webcitation.org/')[1][0:9]            
+                out = r.text
+                try: 
+                    urim = 'http://www.webcitation.org/' + out.split('http://www.webcitation.org/')[1][0:9] 
+                except:
+                   msg = "IndexError (" + self.name+ "): unable to extract a URL to the archived version from the response "
+                   raise  
+            # check if the page is archived 
+            if not self.page_exists_in_wc(urim):
+                msg = "Error (" + self.name+ "): " + " Received a Page Not Found error from the website concerned"
+            else:
+                return urim                                        
         except Exception as e:
+            if msg == '':
+                msg = "Error (" + self.name+ "): " + str(e)
             pass;
-        return self.name+ ": Unexpected error"
+        return msg
