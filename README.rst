@@ -70,7 +70,7 @@ To save the web page (www.foxnews.com) in the Internet Archive:
       $ archivenow --ia www.foxnews.com
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
-- **Example 1**
+- **Example 2**
 
 By default, the web page (e.g., www.foxnews.com) will be saved in the Internet Archive if no optional arguments provided:
 
