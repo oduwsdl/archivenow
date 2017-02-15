@@ -39,9 +39,8 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 
 .. code-block:: bash
 
-
       $ archivenow -h
-      usage: archivenow [-h] [--ia] [--is] [--wc] [--all] [--server]
+      usage: archivenow [-h] [--ia] [--is] [--wc] [-v] [--all] [--server]
                      [--host [HOST]] [--port [PORT]]
                      [URI]
 
@@ -49,14 +48,15 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
         URI            URI of a web resource
 
       optional arguments:
-        -h, --help     show this help message and exit
-        --ia           Use The Internet Archive
-        --is           Use The Archive Today
-        --wc           Use The WebCite Archive
-        --all          Use all possible archives
-        --server       Run archivenow as a Web Service
-        --host [HOST]  The server address
-        --port [PORT]  The port number to run a Web Service
+         -h, --help     show this help message and exit
+         --ia           Use The Internet Archive
+         --is           Use The Archive Today
+         --wc           Use The WebCite Archive
+         -v, --version  Report the version of archivenow
+         --all          Use all possible archives
+         --server       Run archiveNow as a Web Service
+         --host [HOST]  The server address
+         --port [PORT]  The port number to run a Web Service
   
 Examples
 --------
