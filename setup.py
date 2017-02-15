@@ -8,7 +8,7 @@ desc = """A Python library to push web resources into public web archives"""
 
 setup(
     name='archivenow',
-    version='2017.02.15.11.45.40',
+    version='2017.02.15.12.17.30',
     description=desc,
     long_description=long_description,
     author='Mohamed Aturban',
