@@ -9,7 +9,7 @@ As explained below, this library can be used through:
 
 - CLI
 
-- Web Service
+- A Web Service
 
 - A Docker Container
 
@@ -152,9 +152,9 @@ Running as a Docker Container
 .. code-block:: bash
 
     $ docker pull maturban/archivenow
-    $ docker run maturban/archivenow -h
-    $ docker run -p 80:11111 maturban/archivenow --server --port 11111
-    $ docker run maturban/archivenow --ia http://www.cnn.com
+    $ docker run -it --rm maturban/archivenow -h
+    $ docker run -p 80:11111 -it --rm maturban/archivenow --server --port 11111
+    $ docker run -it --rm maturban/archivenow --ia http://www.cnn.com
     
 
 Python Usage
