@@ -70,8 +70,16 @@ To save the web page (www.foxnews.com) in the Internet Archive:
       $ archivenow --ia www.foxnews.com
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
+- **Example 1**
 
-- **Example 2**
+By default, the web page (e.g., www.foxnews.com) will be saved in the Internet Archive if no optional arguments provided:
+
+.. code-block:: bash
+
+      $ archivenow www.foxnews.com
+      ['https://web.archive.org/web/20170215164835/http://www.foxnews.com']
+
+- **Example 3**
 
 To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive Today (archive.is):
 
@@ -81,7 +89,7 @@ To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and
       ['https://web.archive.org/web/20170209140345/http://www.foxnews.com', 'http://archive.is/fPVyc']
 
 
-- **Example 3**
+- **Example 4**
 
 To save the web page (www.foxnews.com) in all configured web archives:
 
@@ -104,7 +112,7 @@ You can run **archivenow** as a web service. You can specify the server address 
          Running on http://0.0.0.0:12345
          (Press CTRL+C to quit) 
 
-- **Example 4**
+- **Example 5**
 
 To save the web page (www.foxnews.com) in The Internet Archive through the web service:
 
@@ -124,7 +132,7 @@ To save the web page (www.foxnews.com) in The Internet Archive through the web s
             ]
           }
       
-- **Example 5**
+- **Example 6**
 
 To save the web page (www.foxnews.com) in all configured archives though the web service:
 
@@ -164,7 +172,7 @@ Python Usage
    
     >>> from archivenow import archivenow
     
-- **Example 6**
+- **Example 7**
 
 To save the web page (www.foxnews.com) in The WebCite Archive:
 
@@ -173,7 +181,7 @@ To save the web page (www.foxnews.com) in The WebCite Archive:
       >>> archivenow.push("www.foxnews.com","wc")
       ['http://www.webcitation.org/6o9LTiDz3']
 
-- **Example 7**
+- **Example 8**
 
 To save the web page (www.foxnews.com) in all configured archives:
 
@@ -182,7 +190,7 @@ To save the web page (www.foxnews.com) in all configured archives:
       >>> archivenow.push("www.foxnews.com","all")
       ['https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV']
       
-- **Example 8**
+- **Example 9**
 
 To start the server from Python do the following. The server/port number can be passed (e.g, start(1111, 'localhost')):
 

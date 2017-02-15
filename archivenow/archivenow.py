@@ -152,13 +152,13 @@ def args_parser():
 
     parser=MyParser()
 
-    arc_handler = 0
+    #arc_handler = 0
     for handler in handlers:
         # add archives identifiers to the list of options
-        arc_handler += 1
+        #arc_handler += 1
         parser.add_argument('--'+handler,  action='store_true', default=False, 
    	                        help='Use '+handlers[handler].name)
-    if arc_handler > 0:
+    if len(handlers) > 0:
         parser.add_argument('--all',  action='store_true', default=False, 
                              help='Use all possible archives ')
 
@@ -176,8 +176,9 @@ def args_parser():
         print ('\n Error: No enabled archive handler found\n')
         sys.exit(0)
 
-    arc_opt = 0;
 
+    arc_opt = 0;
+    # start the server 
     if getattr(args, 'server'):
         if getattr(args, 'port'):
             SERVER_PORT = int(args.port)
@@ -201,10 +202,16 @@ def args_parser():
                     arc_opt += 1
                     for i in push(str(args.URI),handler):
                         res.append(i)
-        if (arc_handler > 0) and (arc_opt == 0):
-            print (parser.printm())
-        else:
-            print (res)
+            # push to the defult archive            
+            if (len(handlers) > 0) and (arc_opt == 0):
+                # set the default; it ia by default or the first archive in the list if not found
+                if 'ia' in handlers:
+                    res = push(str(args.URI),'ia')
+                else:
+                    res = push(str(args.URI),handlers.keys()[0])  
+                #print (parser.printm())
+            #else:
+        print (res)
 
 load_handlers();
 
