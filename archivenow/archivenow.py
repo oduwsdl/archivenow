@@ -199,21 +199,21 @@ def args_parser():
         # push to all possible archives
         if getattr(args, 'all'):
             arc_opt = 1
-            res = push(str(args.URI),'all')
+            res = push(str(args.URI).strip(),'all')
         else:
             # push to the chosen archives 
             for handler in handlers:
                 if getattr(args, handler):
                     arc_opt += 1
-                    for i in push(str(args.URI),handler):
+                    for i in push(str(args.URI).strip(),handler):
                         res.append(i)
             # push to the defult archive            
             if (len(handlers) > 0) and (arc_opt == 0):
                 # set the default; it ia by default or the first archive in the list if not found
                 if 'ia' in handlers:
-                    res = push(str(args.URI),'ia')
+                    res = push(str(args.URI).strip(),'ia')
                 else:
-                    res = push(str(args.URI),handlers.keys()[0])  
+                    res = push(str(args.URI).strip(),handlers.keys()[0])  
                 #print (parser.printm())
             #else:
         print (res)

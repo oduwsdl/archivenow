@@ -60,9 +60,9 @@ class WC_handler(object):
             if not self.page_exists_in_wc(urim):
                 msg = "Error (" + self.name+ "): " + " Received a Page Not Found error from the website concerned"
             else:
-                return urim                                        
+                return str(urim)                                            
         except Exception as e:
             if msg == '':
                 msg = "Error (" + self.name+ "): " + str(e)
             pass;
-        return msg
+        return str(msg)
