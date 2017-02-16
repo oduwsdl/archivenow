@@ -218,4 +218,4 @@ Removing an archive can be done by one of the following options:
 
 Notes
 -----
-The Internet Archive (IA) sets a time gap of al least two minutes between creating different copies of the 'same' resource. For example, if you send a request to the IA to capture (www.cnn.com) at 10:00pm. The IA will create a new copy (lets call it C1) of this CNN homepage. The IA will return (C1) for all requests to archive the CNN homepage recived before 10:02pm. The Archive Today sets this time gap to five minutes.  
+The Internet Archive (IA) sets a time gap of at least two minutes between creating different copies of the 'same' resource. For example, if you send a request to the IA to capture (www.cnn.com) at 10:00pm. The IA will create a new copy (lets call it C1) of this CNN homepage. The IA will return (C1) for all requests to archive the CNN homepage recived before 10:02pm. The Archive Today sets this time gap to five minutes.  
