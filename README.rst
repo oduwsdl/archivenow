@@ -98,7 +98,7 @@ To save the web page (www.foxnews.com) in all configured web archives:
 
 .. code-block:: bash
       
-      $ archivenow.py --all www.foxnews.com --cc_api_key $YOUR-Perma.cc-API-KEY
+      $ archivenow.py --all www.foxnews.com --cc_api_key $YOUR-Perma-cc-API-KEY
       ['https://perma.cc/8YYC-C7RM','https://web.archive.org/web/20170220074919/http://www.foxnews.com','http://archive.is/jy8B0','http://www.webcitation.org/6o9IKD9FP']
 
 Server
@@ -163,13 +163,13 @@ Because an API Key is required by Perma.cc, the HTTP request should be as follow
         
 .. code-block:: bash
       
-      $ curl -i http://0.0.0.0:12345/all/www.foxnews.com?cc_api_key=$YOUR-Perma.cc-API-KEY
+      $ curl -i http://0.0.0.0:12345/all/www.foxnews.com?cc_api_key=$YOUR-Perma-cc-API-KEY
 
 Or use only the Perma.cc:
 
 .. code-block:: bash
 
-      $ curl -i http://0.0.0.0:12345/cc/www.foxnews.com?cc_api_key=$YOUR-Perma.cc-API-KEY
+      $ curl -i http://0.0.0.0:12345/cc/www.foxnews.com?cc_api_key=$YOUR-Perma-cc-API-KEY
 
 Running as a Docker Container
 -----------------------------
@@ -211,7 +211,7 @@ To save the web page (www.foxnews.com) in all configured archives:
 .. code-block:: bash
 
       >>> archivenow.push("www.foxnews.com","all")
-      ['https://perma.cc/8YYC-C7RM','https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV']
+      ['https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV','Error (The Perma.cc Archive): An API KEY is required]
 
 - **Example 10**
 
@@ -219,7 +219,7 @@ To save the web page (www.foxnews.com) in The Perma.cc:
 
 .. code-block:: bash
 
-      >>> archivenow.push("www.foxnews.com","cc","cc_api_key=$YOUR-Perma.cc-API-KEY")
+      >>> archivenow.push("www.foxnews.com","cc","cc_api_key=$YOUR-Perma-cc-API-KEY")
       ['https://perma.cc/8YYC-C7RM']
       
 - **Example 11**
