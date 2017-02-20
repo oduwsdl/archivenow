@@ -38,6 +38,7 @@ CLI USAGE
 Usage of sub-commands in **archivenow** can be accessed through providing the `-h` or `--help` flag, like any of the below.
 
 .. code-block:: bash
+
       $ archivenow -h
       usage: archivenow.py [-h] [--cc] [--cc_api_key [CC_API_KEY]] [--ia] [--is]
                      [--wc] [-v] [--all] [--server] [--host [HOST]]
