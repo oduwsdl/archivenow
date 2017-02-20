@@ -38,25 +38,28 @@ CLI USAGE
 Usage of sub-commands in **archivenow** can be accessed through providing the `-h` or `--help` flag, like any of the below.
 
 .. code-block:: bash
-
       $ archivenow -h
-      usage: archivenow [-h] [--ia] [--is] [--wc] [-v] [--all] [--server]
-                     [--host [HOST]] [--port [PORT]]
+      usage: archivenow.py [-h] [--cc] [--cc_api_key [CC_API_KEY]] [--ia] [--is]
+                     [--wc] [-v] [--all] [--server] [--host [HOST]]
+                     [--port [PORT]]
                      [URI]
 
       positional arguments:
-        URI            URI of a web resource
+        URI                   URI of a web resource
 
       optional arguments:
-         -h, --help     show this help message and exit
-         --ia           Use The Internet Archive
-         --is           Use The Archive Today
-         --wc           Use The WebCite Archive
-         -v, --version  Report the version of archivenow
-         --all          Use all possible archives
-         --server       Run archiveNow as a Web Service
-         --host [HOST]  The server address
-         --port [PORT]  The port number to run a Web Service
+        -h, --help            show this help message and exit
+        --cc                  Use The Perma.cc Archive
+        --cc_api_key [CC_API_KEY]
+                              An API KEY is required by The Perma.cc Archive
+        --ia                  Use The Internet Archive
+        --is                  Use The Archive Today
+        --wc                  Use The WebCite Archive
+        -v, --version         Report the version of archivenow
+        --all                 Use all possible archives
+        --server              Run archiveNow as a Web Service
+        --host [HOST]         A server address
+        --port [PORT]         A port number to run a Web Service
   
 Examples
 --------
@@ -95,9 +98,8 @@ To save the web page (www.foxnews.com) in all configured web archives:
 
 .. code-block:: bash
       
-      $ archivenow --all www.foxnews.com
-      ['https://web.archive.org/web/20170209140913/http://www.foxnews.com','http://archive.is/w6coU','http://www.webcitation.org/6o9IKD9FP']
-
+      $ archivenow.py --all www.foxnews.com --cc_api_key $YOUR-Perma.cc-API-KEY
+      ['https://perma.cc/8YYC-C7RM','https://web.archive.org/web/20170220074919/http://www.foxnews.com','http://archive.is/jy8B0','http://www.webcitation.org/6o9IKD9FP']
 
 Server
 ------
@@ -150,9 +152,24 @@ To save the web page (www.foxnews.com) in all configured archives though the web
             "results": [
               "https://web.archive.org/web/20170209143327/http://www.foxnews.com", 
               "http://archive.is/H2Yfg", 
-              "http://www.webcitation.org/6o9Jubykh"
+              "http://www.webcitation.org/6o9Jubykh",
+              "Error (The Perma.cc Archive): An API KEY is required"
             ]
-          }    
+          }   
+
+- **Example 7**
+
+Because an API Key is required by Perma.cc, the HTTP request should be as following:
+        
+.. code-block:: bash
+      
+      $ curl -i http://0.0.0.0:12345/all/www.foxnews.com?cc_api_key=$YOUR-Perma.cc-API-KEY
+
+Or use only the Perma.cc:
+
+.. code-block:: bash
+
+      $ curl -i http://0.0.0.0:12345/cc/www.foxnews.com?cc_api_key=$YOUR-Perma.cc-API-KEY
 
 Running as a Docker Container
 -----------------------------
@@ -160,7 +177,13 @@ Running as a Docker Container
 .. code-block:: bash
 
     $ docker pull maturban/archivenow
+
+Different ways to run archivenow    
+
+.. code-block:: bash
+
     $ docker run -it --rm maturban/archivenow -h
+    $ docker run -p 80:12345 -it --rm maturban/archivenow --server
     $ docker run -p 80:11111 -it --rm maturban/archivenow --server --port 11111
     $ docker run -it --rm maturban/archivenow --ia http://www.cnn.com
     
@@ -172,7 +195,7 @@ Python Usage
    
     >>> from archivenow import archivenow
     
-- **Example 7**
+- **Example 8**
 
 To save the web page (www.foxnews.com) in The WebCite Archive:
 
@@ -181,18 +204,27 @@ To save the web page (www.foxnews.com) in The WebCite Archive:
       >>> archivenow.push("www.foxnews.com","wc")
       ['http://www.webcitation.org/6o9LTiDz3']
 
-- **Example 8**
+- **Example 9**
 
 To save the web page (www.foxnews.com) in all configured archives:
 
 .. code-block:: bash
 
       >>> archivenow.push("www.foxnews.com","all")
-      ['https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV']
-      
-- **Example 9**
+      ['https://perma.cc/8YYC-C7RM','https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV']
 
-To start the server from Python do the following. The server/port number can be passed (e.g, start(1111, 'localhost')):
+- **Example 10**
+
+To save the web page (www.foxnews.com) in The Perma.cc:
+
+.. code-block:: bash
+
+      >>> archivenow.push("www.foxnews.com","cc","cc_api_key=$YOUR-Perma.cc-API-KEY")
+      ['https://perma.cc/8YYC-C7RM']
+      
+- **Example 11**
+
+To start the server from Python do the following. The server/port number can be passed (e.g, start(port=1111, host='localhost')):
 
 .. code-block:: bash
 

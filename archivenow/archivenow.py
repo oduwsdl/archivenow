@@ -63,11 +63,17 @@ def pushit(path):
     # get request with path 
     else:
         try:
+            # get the args passed to push function like API KEY if provided
+            PUSH_ARGS = {}
+            for k in request.args.keys():
+                PUSH_ARGS[k] = request.args[k]
+
             s = str(path).split('/',1)  
             arc_id = s[0]
             URI = s[1] 
+
             # To push into archives
-            resp = {"results":push(URI, arc_id)}
+            resp = {"results":push(URI, arc_id, PUSH_ARGS)}
             if len(resp["results"]) == 0:
                 return bad_request();
             else:
@@ -80,21 +86,28 @@ def pushit(path):
             pass;
         return bad_request();    
 
-def push(URI,arc_id):
+def push(URI,arc_id, p_args={}):
     global handlers
     try:
         # push to all possible archives
         res = []
         if arc_id == 'all':
             for handler in handlers:
-                res.append(handlers[handler].push(str(URI)))
+                if (handlers[handler].api_required):
+                    # pass args like key API
+                    res.append(handlers[handler].push(str(URI),p_args))
+                else:    
+                    res.append(handlers[handler].push(str(URI)))
         else:
             # push to the chosen archives 
             for handler in handlers:
-                if arc_id == handler:
-                    res.append(handlers[handler].push(str(URI)))
+                if (arc_id == handler) and (handlers[handler].api_required):
+                    res.append(handlers[handler].push(str(URI), p_args))
+                elif (arc_id == handler):
+                    res.append(handlers[handler].push(str(URI)))    
         return res
     except Exception as e:
+        print (e)
         pass;
     return ["bad request"]
 
@@ -159,6 +172,10 @@ def args_parser():
         #arc_handler += 1
         parser.add_argument('--'+handler,  action='store_true', default=False, 
    	                        help='Use '+handlers[handler].name)
+        if (handlers[handler].api_required):
+            parser.add_argument('--'+handler+'_api_key',  nargs='?', 
+                            help='An API KEY is required by '+handlers[handler].name)   
+
     parser.add_argument(
         '-v', '--version', help='Report the version of archivenow', action='version',
         version='ArchiveNow ' + archiveNowVersion)
@@ -172,9 +189,9 @@ def args_parser():
 
         parser.add_argument('URI', nargs='?', help='URI of a web resource')
 
-        parser.add_argument('--host', nargs='?', help='The server address')		
+        parser.add_argument('--host', nargs='?', help='A server address')		
 
-        parser.add_argument('--port', nargs='?', help='The port number to run a Web Service')
+        parser.add_argument('--port', nargs='?', help='A port number to run a Web Service')
 
         args=parser.parse_args()
     else:
@@ -196,24 +213,38 @@ def args_parser():
         if not getattr(args, 'URI'):
             print (parser.error('too few arguments'))
         res = []
-        # push to all possible archives
+        
+
+        # get the args passed to push function like API KEY if provided
+        PUSH_ARGS = {}
+        for handler in handlers:
+            if (handlers[handler].api_required):
+                if getattr(args, handler+'_api_key'):
+                    PUSH_ARGS [handler+'_api_key'] = getattr(args, handler+'_api_key')
+                else:
+                    if getattr(args, handler):
+                        print (parser.error('An API KEY is required by '+handlers[handler].name))
+
+        #sys.exit(0)       
+
+        # push to all possible archives   
         if getattr(args, 'all'):
             arc_opt = 1
-            res = push(str(args.URI).strip(),'all')
+            res = push(str(args.URI).strip(),'all', PUSH_ARGS)
         else:
             # push to the chosen archives 
             for handler in handlers:
                 if getattr(args, handler):
                     arc_opt += 1
-                    for i in push(str(args.URI).strip(),handler):
+                    for i in push(str(args.URI).strip(),handler, PUSH_ARGS):
                         res.append(i)
             # push to the defult archive            
             if (len(handlers) > 0) and (arc_opt == 0):
                 # set the default; it ia by default or the first archive in the list if not found
                 if 'ia' in handlers:
-                    res = push(str(args.URI).strip(),'ia')
+                    res = push(str(args.URI).strip(),'ia', PUSH_ARGS)
                 else:
-                    res = push(str(args.URI).strip(),handlers.keys()[0])  
+                    res = push(str(args.URI).strip(),handlers.keys()[0], PUSH_ARGS)  
                 #print (parser.printm())
             #else:
         print (res)

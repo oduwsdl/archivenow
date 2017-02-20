@@ -5,6 +5,7 @@ class IA_handler(object):
     def __init__(self):
         self.enabled = True
         self.name = 'The Internet Archive'
+        self.api_required = False
 
     def push(self, uri_org):
         msg = ''
