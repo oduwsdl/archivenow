@@ -21,7 +21,7 @@ global handlers
 handlers = {}
 
 # defult value for server/port
-SERVER_IP = '0.0.0.0'
+SERVER_IP = '127.0.0.1'
 SERVER_PORT = 12345
 
 
@@ -106,8 +106,8 @@ def push(URI,arc_id, p_args={}):
                 elif (arc_id == handler):
                     res.append(handlers[handler].push(str(URI)))    
         return res
-    except Exception as e:
-        print (e)
+    except:
+        #print (e)
         pass;
     return ["bad request"]
 
@@ -247,7 +247,8 @@ def args_parser():
                     res = push(str(args.URI).strip(),handlers.keys()[0], PUSH_ARGS)  
                 #print (parser.printm())
             #else:
-        print (res)
+        for rs in res:
+            print (rs)
 
 load_handlers();
 
