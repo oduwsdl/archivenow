@@ -259,7 +259,7 @@ Additional archives may be added by creating a handler file in the "handlers" di
 For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store it in the folder "handlers". The "ma" will be the archive identifier, so to push a web page (e.g., www.cnn.com) to this archive through the Python code, I should write:
 
 
-.. code-block:: python
+.. code-block:: bash
 
       archivenow.push("www.cnn.com","ma")
       
