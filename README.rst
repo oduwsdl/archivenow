@@ -76,7 +76,7 @@ To save the web page (www.foxnews.com) in the Internet Archive:
 
 - **Example 2**
 
-By default, the web page (e.g., www.foxnews.com) will be saved in the Internet Archive if no optional arguments provided:
+By default, the web page (e.g., www.foxnews.com) will be saved in the Internet Archive if no optional arguments are provided:
 
 .. code-block:: bash
 
@@ -85,7 +85,7 @@ By default, the web page (e.g., www.foxnews.com) will be saved in the Internet A
 
 - **Example 3**
 
-To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and The Archive.is:
+To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and Archive.is:
 
 .. code-block:: bash
       
@@ -164,13 +164,13 @@ To save the web page (www.foxnews.com) in all configured archives though the web
 
 - **Example 7**
 
-Because an API Key is required by Perma.cc, the HTTP request should be as following:
+Because an API Key is required by Perma.cc, the HTTP request should be as follows:
         
 .. code-block:: bash
       
       $ curl -i http://127.0.0.1:12345/all/www.foxnews.com?cc_api_key=$Your-Perma-CC-API-Key
 
-Or use only the Perma.cc:
+Or use onlyPerma.cc:
 
 .. code-block:: bash
 
@@ -242,15 +242,15 @@ To start the server from Python do the following. The server/port number can be 
 
 Configuring a new archive or removing existing one
 --------------------------------------------------
-Adding a new archive is as simple as adding a handler file in the folder "handlers". For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store it in the folder "handlers". The "ma" will be the archive identifier, so to push a web page (e.g., www.cnn.com) to this archive through the Python code, I should write ">>>archivenow.push("www.cnn.com","ma")". In the file "ma_handler.py", the name of the class must be "MA_handler". This class must have at least one function called "push" which has one argument. It might be helpful to see how other "\*_handler.py" organized.
+Additional archives may be added by adding a handler file in the folder "handlers". For example, if I want to add a new archive named "My Archive", I would create a file "ma_handler.py" and store it in the folder "handlers". The "ma" will be the archive identifier, so to push a web page (e.g., www.cnn.com) to this archive through the Python code, I should write ">>>archivenow.push("www.cnn.com","ma")". In the file "ma_handler.py", the name of the class must be "MA_handler". This class must have at least one function called "push" which has one argument. See the existing `handler files`_ to see how to organized a newly configured archive handler.
 
 Removing an archive can be done by one of the following options:
 
 - Removing the archive handler file from the folder "handlers"
 
-- Rename the archive handler file to other name that does not end with "_handler.py"
+- Renaming the archive handler file to other name that does not end with "_handler.py"
 
-- Simply, inside the handler file, set the variable "enabled" to "False"
+- Setting the variable "enabled" to "False" inside the handler file
 
 
 Notes
@@ -258,3 +258,5 @@ Notes
 The Internet Archive (IA) sets a time gap of at least two minutes between creating different copies of the "same" resource. 
 
 For example, if you send a request to IA to capture (www.cnn.com) at 10:00pm, IA will create a new copy (*C*) of this URI. IA will then return *C* for all requests to the archive for this URI received until 10:02pm. Using this same submission procedure for Archive.is requires a time gap of five minutes.  
+
+.. _handler files: https://github.com/oduwsdl/archivenow/tree/master/archivenow/handlers
