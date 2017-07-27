@@ -28,7 +28,7 @@ The latest development version containing changes not yet released can be instal
 
 .. code-block:: bash
       
-      $ git clone git@github.com:maturban/archivenow.git
+      $ git clone git@github.com:oduwsdl/archivenow.git
       $ cd archivenow
       $ pip install -r requirements.txt
       $ pip install ./
