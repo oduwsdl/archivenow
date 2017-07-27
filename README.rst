@@ -7,7 +7,7 @@ Archive Now (**archivenow**) currently is configured to push resources into four
 
 As explained below, this library can be used through:
 
-- CLI
+- Command Line Interface (CLI)
 
 - A Web Service
 
@@ -65,7 +65,9 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 Examples
 --------
 
-- **Example 1**
+
+Example 1
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in the Internet Archive:
 
@@ -74,7 +76,8 @@ To save the web page (www.foxnews.com) in the Internet Archive:
       $ archivenow --ia www.foxnews.com
       ['https://web.archive.org/web/20170209135625/http://www.foxnews.com']
 
-- **Example 2**
+Example 2
+~~~~~~~~~
 
 By default, the web page (e.g., www.foxnews.com) will be saved in the Internet Archive if no optional arguments are provided:
 
@@ -83,7 +86,8 @@ By default, the web page (e.g., www.foxnews.com) will be saved in the Internet A
       $ archivenow www.foxnews.com
       https://web.archive.org/web/20170215164835/http://www.foxnews.com
 
-- **Example 3**
+Example 3
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and Archive.is:
 
@@ -94,7 +98,8 @@ To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and
       http://archive.is/fPVyc
 
 
-- **Example 4**
+Example 4
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in all configured web archives:
 
@@ -119,7 +124,8 @@ You can run **archivenow** as a web service. You can specify the server address 
          Running on http://127.0.0.1:12345
          (Press CTRL+C to quit) 
 
-- **Example 5**
+Example 5
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in The Internet Archive through the web service:
 
@@ -139,7 +145,8 @@ To save the web page (www.foxnews.com) in The Internet Archive through the web s
             ]
           }
       
-- **Example 6**
+Example 6
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in all configured archives though the web service:
 
@@ -162,7 +169,8 @@ To save the web page (www.foxnews.com) in all configured archives though the web
             ]
           }   
 
-- **Example 7**
+Example 7
+~~~~~~~~~
 
 Because an API Key is required by Perma.cc, the HTTP request should be as follows:
         
@@ -200,7 +208,8 @@ Python Usage
    
     >>> from archivenow import archivenow
     
-- **Example 8**
+Example 8
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in The WebCite Archive:
 
@@ -209,7 +218,8 @@ To save the web page (www.foxnews.com) in The WebCite Archive:
       >>> archivenow.push("www.foxnews.com","wc")
       ['http://www.webcitation.org/6o9LTiDz3']
 
-- **Example 9**
+Example 9
+~~~~~~~~~
 
 To save the web page (www.foxnews.com) in all configured archives:
 
@@ -218,7 +228,8 @@ To save the web page (www.foxnews.com) in all configured archives:
       >>> archivenow.push("www.foxnews.com","all")
       ['https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV','Error (The Perma.cc Archive): An API KEY is required]
 
-- **Example 10**
+Example 10
+~~~~~~~~~~
 
 To save the web page (www.foxnews.com) in The Perma.cc:
 
@@ -227,7 +238,8 @@ To save the web page (www.foxnews.com) in The Perma.cc:
       >>> archivenow.push("www.foxnews.com","cc","cc_api_key=$YOUR-Perma-cc-API-KEY")
       ['https://perma.cc/8YYC-C7RM']
       
-- **Example 11**
+Example 11
+~~~~~~~~~~
 
 To start the server from Python do the following. The server/port number can be passed (e.g, start(port=1111, host='localhost')):
 
