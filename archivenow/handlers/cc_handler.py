@@ -16,6 +16,7 @@ class CC_handler(object):
 
             r = requests.post('https://api.perma.cc/v1/archives/?api_key='+APIKEY, timeout=120,
                                                            data=json.dumps({"url":uri_org}),
+                                                           headers={'Content-type': 'application/json'},
                                                            allow_redirects=True)       
             r.raise_for_status()
 
@@ -25,6 +26,9 @@ class CC_handler(object):
                 for r2 in r.history:
                     if 'Location' in r2.headers:
                         return 'https://perma.cc/'+r2.headers['Location'].rsplit('/',1)[1]
+            entity_json = r.json()
+            if 'guid' in entity_json:
+                return str('https://perma.cc/'+entity_json['guid'])
             msg = "Error ("+self.name+ "): No HTTP Location header is returned in the response" 
         except Exception as e:
             if (msg == '') and ('_api_key' in str(e)):

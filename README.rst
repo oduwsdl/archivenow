@@ -235,7 +235,7 @@ To save the web page (www.foxnews.com) in The Perma.cc:
 
 .. code-block:: bash
 
-      >>> archivenow.push("www.foxnews.com","cc","cc_api_key=$YOUR-Perma-cc-API-KEY")
+      >>> archivenow.push("www.foxnews.com","cc",{"cc_api_key":"$YOUR-Perma-cc-API-KEY"})
       ['https://perma.cc/8YYC-C7RM']
       
 Example 11
