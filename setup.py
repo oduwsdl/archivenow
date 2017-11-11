@@ -34,7 +34,9 @@ setup(
     ],
     package_data={
         'archivenow': [
-            'handlers/*.*'
+            'handlers/*.*',
+            'templates/*.*',
+            'static/*.*'
           ]
     },
     entry_points='''
