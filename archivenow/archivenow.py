@@ -6,7 +6,7 @@ import glob
 import json
 import importlib
 import argparse
-from flask import request, Flask, jsonify
+from flask import request, Flask, jsonify, render_template
 from __init__ import __version__ as archiveNowVersion
 
 # archive handlers path
@@ -45,14 +45,21 @@ def getServer_IP_PORT():
 
 
 def listArchives_server(handlers):
-
+    uri_args = ''
+    if 'cc' in handlers:
+        if handlers['cc'].enabled and handlers['cc'].api_required:
+            uri_args = '?cc_api_key={Your-Perma.cc-API-Key}'
     li = {"archives": [{
-        "id": "all", "GET": getServer_IP_PORT() + '/all/' + '{URI}',
+        "id": "all", "GET": getServer_IP_PORT() + '/all/' + '{URI}'+uri_args,
         "archive-name": "All enabled archives"}]}
     for handler in handlers:
-        li["archives"].append({
-            "id": handler, "archive-name": handlers[handler].name,
-            "GET": getServer_IP_PORT() + '/' + handler + '/' + '{URI}'})
+        if handlers[handler].enabled:
+            uri_args2 = ''
+            if handler == 'cc':
+                uri_args2 = uri_args
+            li["archives"].append({
+                "id": handler, "archive-name": handlers[handler].name,
+                "GET": getServer_IP_PORT() + '/' + handler + '/' + '{URI}'+uri_args2})
     return li
 
 
@@ -61,10 +68,17 @@ def listArchives_server(handlers):
 def pushit(path):
     # no path; return a list of avaliable archives
     if path == '':
+        #resp = jsonify(listArchives_server(handlers))
+        #resp.status_code = 200
+        return render_template('index.html')
+        #return resp
+    # get request with path
+    elif (path == 'api'):
         resp = jsonify(listArchives_server(handlers))
         resp.status_code = 200
         return resp
-    # get request with path
+    elif (path == "ajax-loader.gif"):
+        return render_template('ajax-loader.gif')
     else:
         try:
             # get the args passed to push function like API KEY if provided

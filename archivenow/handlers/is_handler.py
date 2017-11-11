@@ -5,7 +5,7 @@ class IS_handler(object):
     def __init__(self):
         self.enabled = True
         self.name = 'The Archive.is'
-        self.api_required = False
+        self.api_required = False 
 
     def push(self, uri_org):
         msg = ''

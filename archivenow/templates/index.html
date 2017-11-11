@@ -1,0 +1,343 @@
+<html>
+<head>
+<style>
+
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 14px;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.reveal-if-active label {
+  margin: 0 0 3px 22px;
+  display: block;
+  font-size: smaller;
+}
+.reveal-if-active input[type=text] {
+  width: 300px;
+}
+input[id="choice-archive4"]:checked ~ .reveal-if-active {
+  opacity: 1;
+  max-height: 120px;
+  padding: 0px 0px;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  overflow: visible;
+}
+
+table {
+    margin: 14px auto;
+    opacity: 0;
+}
+
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 1px;
+    text-align: left;
+    font-family: "My Custom Font", Verdana, Tahoma;
+    font-size: 12px;
+}
+
+tr{
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+#title {
+  display: block;
+  text-align: center;
+  padding: 22px 0 0 0
+}
+
+.url{
+  display: block;
+  text-align: center;
+}
+
+#text_url{
+  width:333px;
+  font-size: 12.5px;
+}
+
+#select_label{
+    padding: 0px 270px 0 0;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+#choices{
+      text-align: center;
+      padding: 0px 20px 0px 0px;
+      margin-left: 133px;
+}
+
+#choices2{
+      text-align: left;
+      display: inline-block;
+
+}
+
+#perma_cc_api{
+    margin: -2px 93px 0px 21px;
+}
+
+#submitdiv{
+    text-align: center;
+    padding: 20px 242px 0 0;
+    margin: 0 0 0 38px;
+}
+
+input[type=submit] {
+    width: 5em;
+    height: 2em;
+    font-size: 12px;
+    background-color: gainsboro;
+    margin: 0px 0px 0px 13px;
+}
+
+#errors{
+    font-size: smaller;
+    color: brown;
+    padding: 6px 0px 3px 104px;
+}
+
+.img1{
+
+  width: 13px;
+  opacity: 0;
+}
+
+.img2{
+
+  width: 13px;
+  opacity: 0;
+}
+
+.img3{
+
+  width: 13px;
+  opacity: 0;
+}
+
+.img4{
+
+  width: 13px;
+  opacity: 0;
+}
+
+#apilink{
+  font-size: smaller;
+  padding-top: 39px;
+}
+</style>
+</head>
+<body>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+      <h3 id="title"> Preserve a web page in web archives </h3>
+      <div class="url">
+        <label for="text_url" id="label_url">URL</label>
+        <input type="text" id="text_url" required>
+      </div>
+  
+  <div>
+    <p id="select_label">Select archives:</p>
+    <div id="choices">
+    <div id="choices2">
+    <input type="checkbox" id="choice-archive1" > Internet Archive <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img1" id="img1"> <br>
+    <input type="checkbox" id="choice-archive2" > Archive.is       <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img2" id="img2"> <br>
+    <input type="checkbox" id="choice-archive3" > WebCite          <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img3" id="img3"> <br>
+    <input type="checkbox" id="choice-archive4" > Perma.cc         <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img4" id="img4">
+    <div class="reveal-if-active">
+      <label for="perma_cc_api">Permaa.cc requires an API KEY</label>
+      <input type="text" id="perma_cc_api">
+    </div>
+    </div>
+    </div>
+  </div>
+  <div id="submitdiv">
+    <input type="submit" value="Submit" onClick="push_archive();">
+    <input type="submit" value="Reset" onClick="reset();">
+    <div id ="errors"></div>
+  </div>
+    <table id="results" width="600">
+        <thead>
+        <tr>
+            <th scope="col" width="130">Archive</th>
+            <th scope="col" width="450">Link to the archived page</th>
+        </tr>
+        </thead>
+    </table>
+<div id="apilink"><a href="/api" target="_blank">Archive Now API</a></div>
+
+<script type="text/javascript">
+
+  function reset() {
+
+      window.location.reload();
+  
+  }
+
+  function push_archive() {
+
+            document.getElementById('errors').innerHTML="";
+
+            var arr = []
+
+            var table = document.getElementById('results');
+            for (var r = 1, n = table.rows.length; r < n; r++) {
+                    if(table.rows[r].cells[0].innerHTML.indexOf("http://archive.org") !== -1){
+                      arr.push("ia");
+                    }
+                    if(table.rows[r].cells[0].innerHTML.indexOf("http://archive.is") !== -1){
+                      arr.push("is");
+                    }
+                    if(table.rows[r].cells[0].innerHTML.indexOf("http://www.webcitation.org") !== -1){
+                      arr.push("wc");
+                    }
+                    if(table.rows[r].cells[0].innerHTML.indexOf("http://perma.cc") !== -1){
+                      arr.push("cc");
+                    }
+            }
+
+            function validateURL(textval) {
+                var urlregex = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+                return urlregex.test(textval);
+            }
+            if (validateURL(document.getElementById('text_url').value) == false){
+              document.getElementById('text_url').focus();
+              document.getElementById('errors').innerHTML="*Please enter a correct URL*";
+              return;
+            }
+
+            if (document.getElementById('choice-archive4').checked == true){ // perma.cc
+                if(document.getElementById('perma_cc_api').value.trim() == ""){
+                  document.getElementById('perma_cc_api').focus();
+                  document.getElementById('errors').innerHTML="*Please enter your Perma.cc API KEY*";
+                  return;
+                }
+            }
+
+            var selected_archives = 0;
+
+            if (document.getElementById('choice-archive1').checked == true){
+              
+                  selected_archives = selected_archives + 1;
+
+                  if(arr.indexOf("ia") == -1){
+                      document.getElementById('img1').style.opacity = 1
+                      $.ajax({
+                          type: "GET",
+                          url: "ia/"+document.getElementById('text_url').value,
+                          success: function(json) {
+                              if (validateURL(json['results'][0]) == true){
+                                  var table=document.getElementById("results");
+                                  var row=table.insertRow(-1);
+                                  var cell1=row.insertCell(0);
+                                  var cell2=row.insertCell(1);
+                                  cell1.innerHTML='<a href="http://archive.org" target="_blank"> Internet Archive </a>'
+                                  cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
+                                  document.getElementById('results').style.opacity = 1
+                                  document.getElementById('img1').style.opacity = 0
+                              }
+                          },
+                          complete: function(){
+                            document.getElementById('img1').style.opacity = 0
+                          }
+                      });
+                 }
+            }
+            if (document.getElementById('choice-archive2').checked == true){
+              
+                  selected_archives = selected_archives + 1;
+
+                  if(arr.indexOf("is") == -1){
+                      document.getElementById('img2').style.opacity = 1
+                      $.ajax({
+                          type: "GET",
+                          url: "is/"+document.getElementById('text_url').value,
+                          success: function(json) {
+                              if (validateURL(json['results'][0]) == true){
+                                  var table=document.getElementById("results");
+                                  var row=table.insertRow(-1);
+                                  var cell1=row.insertCell(0);
+                                  var cell2=row.insertCell(1);
+                                  cell1.innerHTML='<a href="http://archive.is" target="_blank"> Archive.is </a>'
+                                  cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
+                                  document.getElementById('results').style.opacity = 1
+                                  document.getElementById('img2').style.opacity = 0
+                              }
+                          },
+                          complete: function(){
+                            document.getElementById('img2').style.opacity = 0
+                          }
+                      });
+                  }
+            }
+            if (document.getElementById('choice-archive3').checked == true){
+                  
+                  selected_archives = selected_archives + 1;
+                  
+                  if(arr.indexOf("wc") == -1){
+                      document.getElementById('img3').style.opacity = 1
+                      $.ajax({
+                          type: "GET",
+                          url: "wc/"+document.getElementById('text_url').value,
+                          success: function(json) {
+                              if (validateURL(json['results'][0]) == true){
+                                  var table=document.getElementById("results");
+                                  var row=table.insertRow(-1);
+                                  var cell1=row.insertCell(0);
+                                  var cell2=row.insertCell(1);
+                                  cell1.innerHTML='<a href="http://www.webcitation.org" target="_blank"> WebCite </a>'
+                                  cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
+                                  document.getElementById('results').style.opacity = 1
+                                  document.getElementById('img3').style.opacity = 0
+                              }
+                          },
+                          complete: function(){
+                            document.getElementById('img3').style.opacity = 0
+                          }
+                      });
+                  }
+            }
+            if (document.getElementById('choice-archive4').checked == true){
+
+                  selected_archives = selected_archives + 1;
+
+                  if(arr.indexOf("cc") == -1){
+                      document.getElementById('img4').style.opacity = 1
+                      $.ajax({
+                          type: "GET",
+                          url: "cc/"+document.getElementById('text_url').value+'?cc_api_key='+document.getElementById('perma_cc_api').value,
+                          success: function(json) {
+                              if (validateURL(json['results'][0]) == true){
+                                  var table=document.getElementById("results");
+                                  var row=table.insertRow(-1);
+                                  var cell1=row.insertCell(0);
+                                  var cell2=row.insertCell(1);
+                                  cell1.innerHTML='<a href="http://perma.cc" target="_blank"> Perma.cc </a>'
+                                  cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
+                                  document.getElementById('results').style.opacity = 1
+                                  document.getElementById('img4').style.opacity = 0
+                              }
+                          },
+                          complete: function(){
+                            document.getElementById('img4').style.opacity = 0
+                          }
+                      });
+                  }
+            }
+
+            if (selected_archives == 0){
+                document.getElementById('errors').innerHTML="*Please select at least one archive*";
+                return;
+            }
+    }
+</script>
+</body>
+</html>

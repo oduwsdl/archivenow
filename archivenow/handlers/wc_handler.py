@@ -8,7 +8,7 @@ class WC_handler(object):
     def __init__(self):
         self.enabled = True
         self.name = 'The WebCite Archive'
-        self.api_required = False
+        self.api_required = False 
 
     # generate an email required to push pages
     def generate_random_email(self):

@@ -1,0 +1,63 @@
+<!--   <h4 id="archivenow_api">Archive Now API</h4>
+  <h5 id="archivenow_api1">To push a web page into particular web archive, use the following URL:</h5>
+  <pre>
+    http://{server}:{port}/{archive-id}/{URI}
+  </pre>
+  <h5 id="archivenow_api2">Archive identifier (use "all" for all archives):</h5>
+<table style="width:30%">
+  <tr>
+    <th>Archive</th>
+    <th>Identifier</th>
+  </tr>
+  <tr>
+    <td>Internet Archive</td>
+    <td>ia</td>
+  </tr>
+  <tr>
+    <td>Archive.is</td>
+    <td>is</td>
+  </tr>
+  <tr>
+    <td>WebCite </td>
+    <td>wc</td>
+  </tr>
+  <tr>
+    <td>Perma.cc</td>
+    <td>cc</td>
+  </tr>
+</table> -->
+<!--   <h5 id="archivenow_api3">Example, capture http://www.example.com by Internet Archive: </h5>
+<pre>
+curl  -i http://127.0.0.1:12345/ia/http://www.example.com
+
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 95
+Server: Werkzeug/0.11.15 Python/2.7.10
+Date: Fri, 10 Nov 2017 22:36:26 GMT
+
+{
+  "results": [
+    "https://web.archive.org/web/20171110223626/http://www.example.com"
+  ]
+}
+</pre>
+  <h5 id="archivenow_api4">Example, capture http://www.example.com by all four archive (An API KEY is required by Perma.cc): </h5>
+<pre>
+curl -i 127.0.0.1:12345/all/http://www.example.com?cc_api_key=8r820...
+
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 207
+Server: Werkzeug/0.11.15 Python/2.7.10
+Date: Fri, 10 Nov 2017 22:42:08 GMT
+
+{
+  "results": [
+    "https://perma.cc/QX65-CFDD", 
+    "https://web.archive.org/web/20171110223626/http://www.example.com", 
+    "http://archive.is/ff17A", 
+    "http://www.webcitation.org/6uschXwlI"
+  ]
+}
+</pre> -->

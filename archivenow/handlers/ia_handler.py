@@ -14,7 +14,7 @@ class IA_handler(object):
             # push into the archive
             r = requests.get(uri, timeout=120, allow_redirects=True)
             r.raise_for_status()
-            # extract the link to the archived copy
+            # extract the link to the archived copy 
             if (r != None):
                 if "Location" in r.headers:
                     return r.headers["Location"]
