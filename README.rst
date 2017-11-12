@@ -194,21 +194,25 @@ Running as a Docker Container
 Different ways to run archivenow    
 
 .. code-block:: bash
+
     $ docker run -it --rm maturban/archivenow -h
 
-Accessible at 127.0.0.0:12345:
+Accessible at 127.0.0.1:12345:
 
 .. code-block:: bash
+
     $ docker run -p 12345:12345 -it --rm maturban/archivenow --server --host 0.0.0.0
 
-Accessible at 127.0.0.0:22222:
+Accessible at 127.0.0.1:22222:
 
 .. code-block:: bash
+
     $ docker run -p 22222:11111 -it --rm maturban/archivenow --server --port 11111 --host 0.0.0.0
 
 To save the web page (http://www.cnn.com) in The Internet Archive
 
 .. code-block:: bash
+
     $ docker run -it --rm maturban/archivenow --ia http://www.cnn.com
     
 
