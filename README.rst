@@ -196,8 +196,8 @@ Different ways to run archivenow
 .. code-block:: bash
 
     $ docker run -it --rm maturban/archivenow -h
-    $ docker run -p 80:12345 -it --rm maturban/archivenow --server
-    $ docker run -p 80:11111 -it --rm maturban/archivenow --server --port 11111
+    $ docker run -p 12345:12345 -it --rm maturban/archivenow --server --host 0.0.0.0
+    $ docker run -p 12345:11111 -it --rm maturban/archivenow --server --port 11111 --host 0.0.0.0
     $ docker run -it --rm maturban/archivenow --ia http://www.cnn.com
     
 
