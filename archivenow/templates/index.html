@@ -148,12 +148,12 @@ input[type=submit] {
     <p id="select_label">Select archives:</p>
     <div id="choices">
     <div id="choices2">
-    <input type="checkbox" id="choice-archive1" > Internet Archive <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img1" id="img1"> <br>
-    <input type="checkbox" id="choice-archive2" > Archive.is       <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img2" id="img2"> <br>
-    <input type="checkbox" id="choice-archive3" > WebCite          <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img3" id="img3"> <br>
-    <input type="checkbox" id="choice-archive4" > Perma.cc         <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img4" id="img4">
+    <input type="checkbox" id="choice-archive1" checked > Internet Archive <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img1" id="img1"> <br>
+    <input type="checkbox" id="choice-archive2" checked > Archive.is       <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img2" id="img2"> <br>
+    <input type="checkbox" id="choice-archive3" checked > WebCite          <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img3" id="img3"> <br>
+    <input type="checkbox" id="choice-archive4" > Perma.cc                 <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img4" id="img4">
     <div class="reveal-if-active">
-      <label for="perma_cc_api">Permaa.cc requires an API KEY</label>
+      <label for="perma_cc_api">Permaa.cc requires <a href="https://perma.cc/settings/tools" target="_blank"> an API Key </a></label>
       <input type="text" id="perma_cc_api">
     </div>
     </div>
@@ -175,6 +175,8 @@ input[type=submit] {
 <div id="apilink"><a href="/api" target="_blank">Archive Now API</a></div>
 
 <script type="text/javascript">
+
+  document.getElementById('perma_cc_api').value = localStorage.getItem("permaccapikey");
 
   function reset() {
 
@@ -210,14 +212,14 @@ input[type=submit] {
             }
             if (validateURL(document.getElementById('text_url').value) == false){
               document.getElementById('text_url').focus();
-              document.getElementById('errors').innerHTML="*Please enter a correct URL*";
+              document.getElementById('errors').innerHTML="*Enter a correct URL*";
               return;
             }
 
             if (document.getElementById('choice-archive4').checked == true){ // perma.cc
                 if(document.getElementById('perma_cc_api').value.trim() == ""){
                   document.getElementById('perma_cc_api').focus();
-                  document.getElementById('errors').innerHTML="*Please enter your Perma.cc API KEY*";
+                  document.getElementById('errors').innerHTML="*Enter your Perma.cc API Key*";
                   return;
                 }
             }
@@ -331,10 +333,11 @@ input[type=submit] {
                           }
                       });
                   }
+                localStorage.setItem("permaccapikey", document.getElementById('perma_cc_api').value);
             }
 
             if (selected_archives == 0){
-                document.getElementById('errors').innerHTML="*Please select at least one archive*";
+                document.getElementById('errors').innerHTML="*Select at least one archive*";
                 return;
             }
     }
