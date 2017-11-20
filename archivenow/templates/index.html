@@ -137,7 +137,7 @@ input[type=submit] {
 </style>
 </head>
 <body>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
       <h3 id="title"> Preserve a web page in web archives </h3>
       <div class="url">
         <label for="text_url" id="label_url">URL</label>
@@ -178,6 +178,35 @@ input[type=submit] {
 
   document.getElementById('perma_cc_api').value = localStorage.getItem("permaccapikey");
 
+  if (localStorage.getItem("check_archive_1") !== null){
+      if (localStorage.getItem("check_archive_1") == 'true'){
+        document.getElementById('choice-archive1').checked = true
+      }else{
+        document.getElementById('choice-archive1').checked = false
+      }
+  }
+  if (localStorage.getItem("check_archive_2") !== null){
+      if (localStorage.getItem("check_archive_2") == 'true'){
+        document.getElementById('choice-archive2').checked = true
+      }else{
+        document.getElementById('choice-archive2').checked = false
+      }
+  }
+  if (localStorage.getItem("check_archive_3") !== null){
+      if (localStorage.getItem("check_archive_3") == 'true'){
+        document.getElementById('choice-archive3').checked = true
+      }else{
+        document.getElementById('choice-archive3').checked = false
+     }
+  }
+  if (localStorage.getItem("check_archive_4") !== null){
+      if (localStorage.getItem("check_archive_4") == 'true'){
+        document.getElementById('choice-archive4').checked = true
+      }else{
+       document.getElementById('choice-archive4').checked = false
+      }
+  }
+
   function reset() {
 
       window.location.reload();
@@ -187,6 +216,11 @@ input[type=submit] {
   function push_archive() {
 
             document.getElementById('errors').innerHTML="";
+            localStorage.setItem("check_archive_1", false);
+            localStorage.setItem("check_archive_2", false);
+            localStorage.setItem("check_archive_3", false);
+            localStorage.setItem("check_archive_4", false);
+
 
             var arr = []
 
@@ -252,6 +286,7 @@ input[type=submit] {
                           }
                       });
                  }
+                 localStorage.setItem("check_archive_1", true);
             }
             if (document.getElementById('choice-archive2').checked == true){
               
@@ -279,6 +314,7 @@ input[type=submit] {
                           }
                       });
                   }
+              localStorage.setItem("check_archive_2", true);
             }
             if (document.getElementById('choice-archive3').checked == true){
                   
@@ -306,6 +342,7 @@ input[type=submit] {
                           }
                       });
                   }
+                  localStorage.setItem("check_archive_3", true);
             }
             if (document.getElementById('choice-archive4').checked == true){
 
@@ -334,6 +371,7 @@ input[type=submit] {
                       });
                   }
                 localStorage.setItem("permaccapikey", document.getElementById('perma_cc_api').value);
+                localStorage.setItem("check_archive_4", true);
             }
 
             if (selected_archives == 0){

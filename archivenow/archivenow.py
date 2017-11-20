@@ -7,7 +7,10 @@ import json
 import importlib
 import argparse
 from flask import request, Flask, jsonify, render_template
-from __init__ import __version__ as archiveNowVersion
+
+#from __init__ import __version__ as archiveNowVersion
+
+archiveNowVersion = '2017.11.20.05.39.33'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +24,7 @@ global handlers
 handlers = {}
 
 # defult value for server/port
-SERVER_IP = '127.0.0.1'
+SERVER_IP = '0.0.0.0'
 SERVER_PORT = 12345
 
 
@@ -49,17 +52,17 @@ def listArchives_server(handlers):
     if 'cc' in handlers:
         if handlers['cc'].enabled and handlers['cc'].api_required:
             uri_args = '?cc_api_key={Your-Perma.cc-API-Key}'
-    li = {"archives": [{
-        "id": "all", "GET": getServer_IP_PORT() + '/all/' + '{URI}'+uri_args,
+    li = {"archives": [{  # getServer_IP_PORT() + 
+        "id": "all", "GET":'/all/' + '{URI}'+uri_args,
         "archive-name": "All enabled archives"}]}
     for handler in handlers:
         if handlers[handler].enabled:
             uri_args2 = ''
             if handler == 'cc':
                 uri_args2 = uri_args
-            li["archives"].append({
+            li["archives"].append({ #getServer_IP_PORT() +
                 "id": handler, "archive-name": handlers[handler].name,
-                "GET": getServer_IP_PORT() + '/' + handler + '/' + '{URI}'+uri_args2})
+                "GET":  '/' + handler + '/' + '{URI}'+uri_args2})
     return li
 
 
