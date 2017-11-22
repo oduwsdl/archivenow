@@ -41,7 +41,7 @@ class WC_handler(object):
         return False        
 
 
-    def push(self, uri_org):
+    def push(self, uri_org, p_args=[]):
         msg = ''
         try:
             # push to the archive

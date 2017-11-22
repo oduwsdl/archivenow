@@ -1,3 +1,4 @@
+import os
 import requests
 
 class IS_handler(object):
@@ -7,15 +8,31 @@ class IS_handler(object):
         self.name = 'The Archive.is'
         self.api_required = False 
 
-    def push(self, uri_org):
+    def push(self, uri_org, p_args=[]):
         msg = ''
         try:
 
+            from_heroku = False
+            if 'from_heroku' in p_args:
+                from_heroku = p_args['from_heroku']
+
+            if not from_heroku:
+                try:
+                     if os.environ['PYTHONHOME'].startswith('/app/.heroku/python'):
+                        from_heroku = True
+                except:
+                    pass;
+
             archiveTodaySubmitId = ""
-            archiveTodayUserAgent = { "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" }
+
+            archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": "archive.is"}
 
             # get the newest submitid required to push pages
-            rid = requests.get('http://archive.is/', timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+            host = 'archive.is'
+            if from_heroku:
+                host = '178.62.195.5' # or 151.236.217.7
+            rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+
             rid.raise_for_status()
             htmldata = str(rid.content)
             
@@ -26,10 +43,10 @@ class IS_handler(object):
                 raise  
 
             # push to the archive
-            r = requests.post('http://archive.is/submit/', timeout=120,
-                                                           data={"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId},
-                                                           allow_redirects=True,
-                                                           headers=archiveTodayUserAgent)          
+            r = requests.post('http://'+host+'/submit/', timeout=120,
+                                                             data={"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId},
+                                                             allow_redirects=True,
+                                                             headers=archiveTodayUserAgent)          
             r.raise_for_status()
             # extract the link to the archived copy
             if 'Refresh' in r.headers:

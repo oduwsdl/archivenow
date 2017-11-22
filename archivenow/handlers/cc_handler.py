@@ -8,7 +8,7 @@ class CC_handler(object):
         self.name = 'The Perma.cc Archive'
         self.api_required = True
 
-    def push(self, uri_org, p_args):
+    def push(self, uri_org, p_args=[]):
         msg = ''
         try:
 
@@ -32,7 +32,7 @@ class CC_handler(object):
             msg = "Error ("+self.name+ "): No HTTP Location header is returned in the response" 
         except Exception as e:
             if (msg == '') and ('_api_key' in str(e)):
-                msg = "Error (" + self.name+ "): " + 'An API KEY is required '
+                msg = "Error (" + self.name+ "): " + 'An API Key is required '
             elif (msg == ''):
                 msg = "Error (" + self.name+ "): " + str(e)
             pass;

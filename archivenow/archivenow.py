@@ -10,7 +10,7 @@ from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2017.11.20.05.39.33'
+archiveNowVersion = '2017.11.21.10.50.27'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -38,13 +38,13 @@ def bad_request(error=None):
     return resp
 
 
-def getServer_IP_PORT():
-    u = str(SERVER_IP)
-    if str(SERVER_PORT) != '80':
-        u = u + ":" + str(SERVER_PORT)
-    if 'http' != u[0:4]:
-        u = 'http://' + u
-    return u
+# def getServer_IP_PORT():
+#     u = str(SERVER_IP)
+#     if str(SERVER_PORT) != '80':
+#         u = u + ":" + str(SERVER_PORT)
+#     if 'http' != u[0:4]:
+#         u = 'http://' + u
+#     return u
 
 
 def listArchives_server(handlers):
@@ -93,6 +93,9 @@ def pushit(path):
             arc_id = s[0]
             URI = s[1]
 
+            if 'herokuapp.com' in request.host:
+                PUSH_ARGS['from_heroku'] = True
+
             # To push into archives
             resp = {"results": push(URI, arc_id, PUSH_ARGS)}
             if len(resp["results"]) == 0:
@@ -113,20 +116,21 @@ def push(URI, arc_id, p_args={}):
     try:
         # push to all possible archives
         res = []
-        if arc_id == 'all':
-            for handler in handlers:
-                if (handlers[handler].api_required):
+        ### if arc_id == 'all':
+            ### for handler in handlers:
+                ### if (handlers[handler].api_required):
                     # pass args like key API
-                    res.append(handlers[handler].push(str(URI), p_args))
-                else:
-                    res.append(handlers[handler].push(str(URI)))
-        else:
+                    ### res.append(handlers[handler].push(str(URI), p_args))
+                ### else:
+                    ### res.append(handlers[handler].push(str(URI)))
+        ### else:
             # push to the chosen archives
-            for handler in handlers:
-                if (arc_id == handler) and (handlers[handler].api_required):
-                    res.append(handlers[handler].push(str(URI), p_args))
-                elif (arc_id == handler):
-                    res.append(handlers[handler].push(str(URI)))
+        for handler in handlers:
+            if (arc_id == handler) or (arc_id == 'all'):
+            ### if (arc_id == handler): ### and (handlers[handler].api_required):
+                res.append(handlers[handler].push(str(URI), p_args))
+                ### elif (arc_id == handler):
+                    ### res.append(handlers[handler].push(str(URI)))
         return res
     except:
         pass
@@ -272,7 +276,7 @@ def args_parser():
                     if getattr(args, handler):
                         print (
                             parser.error(
-                                'An API KEY is required by ' +
+                                'An API Key is required by ' +
                                 handlers[handler].name))
 
         # sys.exit(0)

@@ -7,7 +7,7 @@ class IA_handler(object):
         self.name = 'The Internet Archive'
         self.api_required = False
 
-    def push(self, uri_org):
+    def push(self, uri_org, p_args=[]):
         msg = ''
         try:
             uri = 'https://web.archive.org/save/' + uri_org
