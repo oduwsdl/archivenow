@@ -6,11 +6,12 @@ import glob
 import json
 import importlib
 import argparse
+import string
 from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2017.11.21.10.50.27'
+archiveNowVersion = '2018.05.26.08.55.59'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -160,14 +161,12 @@ def load_handlers():
     for file in glob.glob(PATH_HANDLER + '/' + '*.py'):
         sfile = file.rsplit('_', 1)
         if len(sfile) == 2:
-
             strRight = sfile[1]
             strLeft = sfile[0].rsplit("/", 1)
             if len(strLeft) > 1:
                 strLeft = strLeft[1]
             else:
                 strLeft = strLeft[0]
-
             if re.match(
                     "^[A-Za-z0-9_-]*$",
                     strLeft) and (
@@ -176,7 +175,6 @@ def load_handlers():
                 mod_class = getattr(mod, strLeft.upper() + '_handler')
                 # finally an object is created
                 handlers[strLeft] = mod_class()
-
     # exclude all disabled archives
     for handler in handlers.keys():
         if not handlers[handler].enabled:
@@ -206,7 +204,11 @@ def args_parser():
     for handler in handlers:
         # add archives identifiers to the list of options
         # arc_handler += 1
-        parser.add_argument('--' + handler, action='store_true', default=False,
+        if handler == 'warc':
+            parser.add_argument('--' + handler, nargs='?',
+                            help=handlers[handler].name)
+        else:
+            parser.add_argument('--' + handler, action='store_true', default=False,
                             help='Use ' + handlers[handler].name)
         if (handlers[handler].api_required):
             parser.add_argument(
@@ -235,6 +237,9 @@ def args_parser():
         parser.add_argument('URI', nargs='?', help='URI of a web resource')
 
         parser.add_argument('--host', nargs='?', help='A server address')
+
+        if 'warc' in handlers.keys():
+            parser.add_argument('--agent', nargs='?', help='Use "wget" or "squidwarc" for WARC generation')
 
         parser.add_argument(
             '--port',
@@ -278,6 +283,19 @@ def args_parser():
                             parser.error(
                                 'An API Key is required by ' +
                                 handlers[handler].name))
+            if handler == 'warc':
+                PUSH_ARGS['warc'] = getattr(args, 'warc')
+                if PUSH_ARGS['warc'] == None:
+                    valid_chars = "-_.()/ %s%s" % (string.ascii_letters, string.digits)
+                    PUSH_ARGS['warc'] = ''.join(c for c in str(args.URI).strip() if c in valid_chars)
+                    PUSH_ARGS['warc'] = PUSH_ARGS['warc'].replace(' ','_').replace('/','_') # I don't like spaces in filenames.
+                if PUSH_ARGS['warc'][-1] == '_':
+                    PUSH_ARGS['warc'] = PUSH_ARGS['warc'][:-1]
+                agent = 'wget'
+                tmp_agent = getattr(args, 'agent')
+                if tmp_agent == 'squidwarc':
+                    agent = tmp_agent
+                PUSH_ARGS['agent'] = agent
 
         # sys.exit(0)
 
@@ -288,7 +306,7 @@ def args_parser():
         else:
             # push to the chosen archives
             for handler in handlers:
-                if getattr(args, handler):
+                if getattr(args, handler) != False:
                     arc_opt += 1
                     for i in push(str(args.URI).strip(), handler, PUSH_ARGS):
                         res.append(i)
