@@ -11,7 +11,7 @@ from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2018.05.26.08.55.59'
+archiveNowVersion = '2018.05.26.11.11.31'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -205,7 +205,7 @@ def args_parser():
         # add archives identifiers to the list of options
         # arc_handler += 1
         if handler == 'warc':
-            parser.add_argument('--' + handler, nargs='?',
+            parser.add_argument('--' + handler, nargs='?', 
                             help=handlers[handler].name)
         else:
             parser.add_argument('--' + handler, action='store_true', default=False,
@@ -283,6 +283,7 @@ def args_parser():
                             parser.error(
                                 'An API Key is required by ' +
                                 handlers[handler].name))
+            orginal_warc_value = getattr(args, 'warc')
             if handler == 'warc':
                 PUSH_ARGS['warc'] = getattr(args, 'warc')
                 if PUSH_ARGS['warc'] == None:
@@ -306,7 +307,7 @@ def args_parser():
         else:
             # push to the chosen archives
             for handler in handlers:
-                if getattr(args, handler) != False:
+                if getattr(args, handler):
                     arc_opt += 1
                     for i in push(str(args.URI).strip(), handler, PUSH_ARGS):
                         res.append(i)
