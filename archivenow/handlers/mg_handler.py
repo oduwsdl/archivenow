@@ -49,10 +49,8 @@ class MG_handler(object):
                                         1)[1].split('"', 1)[0]
         except Exception as e:
             if not msg:
-                msg = "Error (" + self.name+ "): " 
-                if ('list index out of range' in str(e)) or ("local variable 'token' referenced before assignment" in str(e)):
-                    msg = msg + "We can not obtain this page because the time limit has been reached or for technical ... "
-                else:
-                    msg = msg + str(e)
+                msg = "Error (" + self.name+ "): " + str(e)
             pass;
+        if ('list index out of range' in msg) or ('referenced before assignment' in msg):
+            msg = "Error (" + self.name+ "): " + "We can not obtain this page because the time limit has been reached or for technical ... "
         return msg
