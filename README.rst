@@ -106,7 +106,7 @@ To save the web page (www.foxnews.com) in the Internet Archive (archive.org) and
 Example 4
 ~~~~~~~~~
 
-To save the web page (www.foxnews.com) in all configured web archives. In addition to preserving the page in all configured archives, this command will also locally create a WARC file:
+To save the web page (https://nypost.com/) in all configured web archives. In addition to preserving the page in all configured archives, this command will also locally create a WARC file:
 
 .. code-block:: bash
       
@@ -122,7 +122,7 @@ To save the web page (www.foxnews.com) in all configured web archives. In additi
 Example 5
 ~~~~~~~~~
 
-To download the web page (www.foxnews.com) and create a WARC file:
+To download the web page (https://nypost.com/) and create a WARC file:
 
 .. code-block:: bash
       
@@ -195,13 +195,13 @@ Because an API Key is required by Perma.cc, the HTTP request should be as follow
         
 .. code-block:: bash
       
-      $ curl -i http://127.0.0.1:12345/all/www.foxnews.com?cc_api_key=$Your-Perma-CC-API-Key
+      $ curl -i http://127.0.0.1:12345/all/https://nypost.com/?cc_api_key=$Your-Perma-CC-API-Key
 
 Or use only Perma.cc:
 
 .. code-block:: bash
 
-      $ curl -i http://127.0.0.1:12345/cc/www.foxnews.com?cc_api_key=$Your-Perma-CC-API-Key
+      $ curl -i http://127.0.0.1:12345/cc/https://nypost.com/?cc_api_key=$Your-Perma-CC-API-Key
 
 Running as a Docker Container
 -----------------------------
@@ -228,7 +228,7 @@ Accessible at 127.0.0.1:22222:
 
     $ docker run -p 22222:11111 -it --rm maturban/archivenow --server --port 11111 --host 0.0.0.0
 
-.. image:: http://www.cs.odu.edu/~maturban/archivenow.gif
+.. image:: http://www.cs.odu.edu/~maturban/archivenow-6-archives.gif
    :width: 10pt
 
 
