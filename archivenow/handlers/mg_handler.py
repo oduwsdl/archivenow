@@ -12,6 +12,10 @@ class MG_handler(object):
         self.api_required = False
 
     def push(self, uri_org, p_args=[]):
+
+        if not uri_org.startswith('http'):
+            uri_org = 'http://' + uri_org
+
         msg = ''
         try:
 
@@ -46,7 +50,7 @@ class MG_handler(object):
         except Exception as e:
             if not msg:
                 msg = "Error (" + self.name+ "): " 
-                if 'list index out of range' in str(e):
+                if ('list index out of range' in str(e)) or ("local variable 'token' referenced before assignment" in str(e)):
                     msg = msg + "We can not obtain this page because the time limit has been reached or for technical ... "
                 else:
                     msg = msg + str(e)

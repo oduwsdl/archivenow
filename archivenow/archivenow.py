@@ -13,7 +13,7 @@ from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2018.10.02.03.30.55'
+archiveNowVersion = '2018.10.02.04.43.04'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -162,6 +162,7 @@ def push(URI, arc_id, p_args={}):
         del res_uris[res_uris_idx]
         return res
     except:
+        del res_uris[res_uris_idx]
         pass
     return ["bad request"]
 
