@@ -34,6 +34,9 @@ class ST_handler(object):
                 new_results = re_exists_url.findall(page)
                 msg = new_results[0]
 
+            msg = msg.replace('http://', 'https://')
+            msg = msg.replace('Archive.st', 'archive.st')
+
         except Exception as e:
             msg = "ERROR: ({0})".format(e)
 
