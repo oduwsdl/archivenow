@@ -132,7 +132,7 @@ To download the web page (https://nypost.com/) and create a WARC file:
 Server
 ------
 
-You can run **archivenow** as a web service. You can specify the server address and/or the port number (e.g., --host localhost  --port 11111)
+You can run **archivenow** as a web service. You can specify the server address and/or the port number (e.g., --host localhost  --port 12345)
 
 .. code-block:: bash
       
