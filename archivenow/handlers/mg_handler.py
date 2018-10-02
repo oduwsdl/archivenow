@@ -36,7 +36,8 @@ class MG_handler(object):
             try:
                 r2 = requests.post('http://megalodon.jp/pc/get_simple/decide',
                                 data={"url":uri_org, "token":token},
-                                cookies=cookies, headers=headers)
+                                cookies=cookies, headers=headers,
+                                )
             except Exception as e:
                 msg = "Error ({0}): {1}".format(self.name, str(e))
 
@@ -44,6 +45,10 @@ class MG_handler(object):
                                         1)[1].split('"', 1)[0]
         except Exception as e:
             if not msg:
-                msg = "Error (" + self.name+ "): " + str(e)
+                msg = "Error (" + self.name+ "): " 
+                if 'list index out of range' in str(e):
+                    msg = msg + "We can not obtain this page because the time limit has been reached or for technical ... "
+                else:
+                    msg = msg + str(e)
             pass;
         return msg

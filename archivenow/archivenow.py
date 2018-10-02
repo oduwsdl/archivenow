@@ -2,16 +2,18 @@
 import os
 import re
 import sys
+import uuid
 import glob
 import json
 import importlib
 import argparse
 import string
+from threading import Thread
 from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2018.05.26.11.11.31'
+archiveNowVersion = '2018.10.02.03.30.55'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -111,12 +113,25 @@ def pushit(path):
             pass
         return bad_request()
 
+res_uris = {}
+
+
+def push_proxy(hdlr, URIproxy, p_args_proxy, res_uris_idx):
+    global res_uris
+    try:
+        res = hdlr.push( URIproxy , p_args_proxy)
+        print ( res )
+        res_uris[res_uris_idx].append(res)
+    except:
+        pass;
 
 def push(URI, arc_id, p_args={}):
     global handlers
+    global res_uris
     try:
         # push to all possible archives
-        res = []
+        res_uris_idx = str(uuid.uuid4())
+        res_uris[res_uris_idx] = []
         ### if arc_id == 'all':
             ### for handler in handlers:
                 ### if (handlers[handler].api_required):
@@ -126,12 +141,25 @@ def push(URI, arc_id, p_args={}):
                     ### res.append(handlers[handler].push(str(URI)))
         ### else:
             # push to the chosen archives
+
+        threads = []
+
         for handler in handlers:
             if (arc_id == handler) or (arc_id == 'all'):
             ### if (arc_id == handler): ### and (handlers[handler].api_required):
-                res.append(handlers[handler].push(str(URI), p_args))
+                #res.append(handlers[handler].push(str(URI), p_args))
+                #push_proxy( handlers[handler], str(URI), p_args, res_uris_idx)
+                threads.append(Thread(target=push_proxy, args=(handlers[handler],str(URI), p_args, res_uris_idx,)))
                 ### elif (arc_id == handler):
                     ### res.append(handlers[handler].push(str(URI)))
+
+        for th in threads:
+            th.start()
+        for th in threads:
+            th.join()
+
+        res = res_uris[res_uris_idx]
+        del res_uris[res_uris_idx]
         return res
     except:
         pass
@@ -289,7 +317,8 @@ def args_parser():
                 if PUSH_ARGS['warc'] == None:
                     valid_chars = "-_.()/ %s%s" % (string.ascii_letters, string.digits)
                     PUSH_ARGS['warc'] = ''.join(c for c in str(args.URI).strip() if c in valid_chars)
-                    PUSH_ARGS['warc'] = PUSH_ARGS['warc'].replace(' ','_').replace('/','_') # I don't like spaces in filenames.
+                    PUSH_ARGS['warc'] = PUSH_ARGS['warc'].replace(' ','_').replace('/','_').replace('__','_') # I don't like spaces in filenames.
+                    PUSH_ARGS['warc'] = PUSH_ARGS['warc']+'_'+str(uuid.uuid4())[:8]
                 if PUSH_ARGS['warc'][-1] == '_':
                     PUSH_ARGS['warc'] = PUSH_ARGS['warc'][:-1]
                 agent = 'wget'
@@ -322,8 +351,8 @@ def args_parser():
                                handlers.keys()[0], PUSH_ARGS)
                 # print (parser.printm())
             # else:
-        for rs in res:
-            print (rs)
+        # for rs in res:
+        #     print (rs)
 
 load_handlers()
 
