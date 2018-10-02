@@ -94,7 +94,7 @@ def pushit(path):
 
             s = str(path).split('/', 1)
             arc_id = s[0]
-            URI = s[1]
+            URI = request.url.split('/', 4)[4] # include query params, too
 
             if 'herokuapp.com' in request.host:
                 PUSH_ARGS['from_heroku'] = True
