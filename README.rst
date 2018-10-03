@@ -208,25 +208,25 @@ Running as a Docker Container
 
 .. code-block:: bash
 
-    $ docker pull maturban/archivenow
+    $ docker image pull oduwsdl/archivenow
 
 Different ways to run archivenow    
 
 .. code-block:: bash
 
-    $ docker run -it --rm maturban/archivenow -h
+    $ docker container run -it --rm oduwsdl/archivenow -h
 
 Accessible at 127.0.0.1:12345:
 
 .. code-block:: bash
 
-    $ docker run -p 12345:12345 -it --rm maturban/archivenow --server --host 0.0.0.0
+    $ docker container run -p 12345:12345 -it --rm oduwsdl/archivenow --server --host 0.0.0.0
 
 Accessible at 127.0.0.1:22222:
 
 .. code-block:: bash
 
-    $ docker run -p 22222:11111 -it --rm maturban/archivenow --server --port 11111 --host 0.0.0.0
+    $ docker container run -p 22222:11111 -it --rm oduwsdl/archivenow --server --port 11111 --host 0.0.0.0
 
 .. image:: http://www.cs.odu.edu/~maturban/archivenow-6-archives.gif
    :width: 10pt
@@ -236,7 +236,7 @@ To save the web page (http://www.cnn.com) in The Internet Archive
 
 .. code-block:: bash
 
-    $ docker run -it --rm maturban/archivenow --ia http://www.cnn.com
+    $ docker container run -it --rm oduwsdl/archivenow --ia http://www.cnn.com
     
 
 Python Usage
