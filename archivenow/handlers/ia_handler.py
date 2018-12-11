@@ -23,9 +23,11 @@ class IA_handler(object):
                 else:
                     for r2 in r.history:
                         if 'Location' in r2.headers:
-                            return r2.headers['Location']
+                            return r.url
+                            #return r2.headers['Location']
                         if 'Content-Location' in r2.headers:
-                            return r2.headers['Content-Location']
+                            return r.url
+                            #return r2.headers['Content-Location']
             msg = "("+self.name+ "): No HTTP Location/Content-Location header is returned in the response"               
         except Exception as e:
             if msg == '':
