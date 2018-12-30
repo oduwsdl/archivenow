@@ -25,13 +25,39 @@ class IS_handler(object):
 
             archiveTodaySubmitId = ""
 
-            archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": "archive.is"}
-
             # get the newest submitid required to push pages
-            host = 'archive.is'
+            
             if from_heroku:
                 host = '178.62.195.5' # or 151.236.217.7
-            rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+            
+            request_ok = True
+
+            try:
+                host = 'archive.li'
+                archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
+                rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+            except:
+                request_ok = False
+                pass;
+
+            if not request_ok:
+                try:
+                    host = 'archive.is'
+                    archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
+                    rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+                except:
+                    request_ok = False
+                    pass;
+
+            if not request_ok:
+                try:
+                    host = 'archive.today'
+                    archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
+                    rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+                except:
+                    request_ok = False
+                    pass;
+
 
             rid.raise_for_status()
             htmldata = str(rid.content)

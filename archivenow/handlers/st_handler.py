@@ -12,7 +12,7 @@ re_exists_url = re.compile("archive here: <a href=(http\S+?)>http\S+?</a></h3>")
 class ST_handler(object):
 
     def __init__(self):
-        self.enabled = True
+        self.enabled = False
         self.name = 'The Archive.st'
         self.api_required = False
 
