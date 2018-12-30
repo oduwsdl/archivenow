@@ -36,6 +36,7 @@ class IS_handler(object):
                 host = 'archive.li'
                 archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
                 rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+                request_ok = True
             except:
                 request_ok = False
                 pass;
@@ -45,6 +46,7 @@ class IS_handler(object):
                     host = 'archive.is'
                     archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
                     rid = requests.get('http://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+                    request_ok = True
                 except:
                     request_ok = False
                     pass;

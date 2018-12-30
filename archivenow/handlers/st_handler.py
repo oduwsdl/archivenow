@@ -12,7 +12,7 @@ re_exists_url = re.compile("archive here: <a href=(http\S+?)>http\S+?</a></h3>")
 class ST_handler(object):
 
     def __init__(self):
-        self.enabled = False
+        self.enabled = True
         self.name = 'The Archive.st'
         self.api_required = False
 
@@ -26,6 +26,9 @@ class ST_handler(object):
 
             page = str(r.content)
 
+            if page in "<div class='alert'>The Captcha is invalid. Please try again.</div>":
+                raise ValueError('The Captcha is invalid.')
+
             results = r_url.findall(page)
 
             if results:
@@ -33,11 +36,10 @@ class ST_handler(object):
             elif "ERROR" in page:
                 new_results = re_exists_url.findall(page)
                 msg = new_results[0]
-
             msg = msg.replace('http://', 'https://')
             msg = msg.replace('Archive.st', 'archive.st')
 
         except Exception as e:
-            msg = "ERROR: ({0})".format(e)
+            msg = "ERROR ({0}): {1}".format(self.name,e)
 
         return msg
