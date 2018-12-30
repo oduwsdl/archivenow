@@ -13,7 +13,7 @@ from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2018.12.29.11.47.19'
+archiveNowVersion = '2018.12.29.12.42.08'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
@@ -205,7 +205,8 @@ def load_handlers():
                 # finally an object is created
                 handlers[strLeft] = mod_class()
     # exclude all disabled archives
-    for handler in handlers.keys():
+
+    for handler in list(handlers): # handlers.keys():
         if not handlers[handler].enabled:
             del handlers[handler]
 
