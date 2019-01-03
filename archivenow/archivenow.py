@@ -13,7 +13,7 @@ from flask import request, Flask, jsonify, render_template
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2018.1.2.10.28.10'
+archiveNowVersion = '2019.1.2.10.28.10'
 
 # archive handlers path
 PATH = str(os.path.dirname(os.path.abspath(__file__)))
