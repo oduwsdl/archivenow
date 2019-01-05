@@ -29,7 +29,7 @@ class IS_handler(object):
             host = '178.62.195.5' # or 151.236.217.7
 
         # Iterate over those domain til one succeeds or no one
-        archive_is_domains = ['archive.li', 'archive.vn', 'archive.is', 'archive.today']
+        archive_is_domains = ['archive.li', 'archive.vn','archive.fo', 'archive.md', 'archive.ph', 'archive.today', 'archive.is']
 
         for host in archive_is_domains:
 
