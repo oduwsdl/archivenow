@@ -10,14 +10,15 @@ import argparse
 import string
 from threading import Thread
 from flask import request, Flask, jsonify, render_template
+from pathlib import Path
 
 #from __init__ import __version__ as archiveNowVersion
 
 archiveNowVersion = '2019.1.5.2.19.34'
 
 # archive handlers path
-PATH = str(os.path.dirname(os.path.abspath(__file__)))
-PATH_HANDLER = PATH + '/handlers/'
+PATH = Path(os.path.dirname(os.path.abspath(__file__)))
+PATH_HANDLER = PATH / 'handlers'
 
 # for the web app
 app = Flask(__name__)
@@ -184,26 +185,16 @@ def load_handlers():
     global handlers
     handlers = {}
     # add the path of the handlers to the system so they can be imported
-    sys.path.append(PATH_HANDLER)
+    sys.path.append(str(PATH_HANDLER))
 
     # create a list of handlers.
-    for file in glob.glob(PATH_HANDLER + '/' + '*.py'):
-        sfile = file.rsplit('_', 1)
-        if len(sfile) == 2:
-            strRight = sfile[1]
-            strLeft = sfile[0].rsplit("/", 1)
-            if len(strLeft) > 1:
-                strLeft = strLeft[1]
-            else:
-                strLeft = strLeft[0]
-            if re.match(
-                    "^[A-Za-z0-9_-]*$",
-                    strLeft) and (
-                    strRight == 'handler.py'):
-                mod = importlib.import_module(strLeft + '_handler')
-                mod_class = getattr(mod, strLeft.upper() + '_handler')
-                # finally an object is created
-                handlers[strLeft] = mod_class()
+    for file in PATH_HANDLER.glob('*_handler.py'):
+        name = file.stem
+        prefix = name.replace('_handler', '')
+        mod = importlib.import_module(name)
+        mod_class = getattr(mod, prefix.upper() + '_handler')
+        # finally an object is created
+        handlers[prefix] = mod_class()
     # exclude all disabled archives
 
     for handler in list(handlers): # handlers.keys():
