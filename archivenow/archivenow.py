@@ -14,7 +14,7 @@ from pathlib import Path
 
 #from __init__ import __version__ as archiveNowVersion
 
-archiveNowVersion = '2019.2.24.11.10.10'
+archiveNowVersion = '2019.3.10.3.54.28'
 
 # archive handlers path
 PATH = Path(os.path.dirname(os.path.abspath(__file__)))
