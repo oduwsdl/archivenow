@@ -256,22 +256,22 @@ input[type=submit] {
 
             var table = document.getElementById('results');
             for (var r = 1, n = table.rows.length; r < n; r++) {
-                    if(table.rows[r].cells[0].innerHTML.indexOf("http://archive.org") !== -1){
+                    if(table.rows[r].cells[0].innerHTML.indexOf("https://archive.org") !== -1){
                       arr.push("ia");
                     }
-                    if(table.rows[r].cells[0].innerHTML.indexOf("http://archive.is") !== -1){
+                    if(table.rows[r].cells[0].innerHTML.indexOf("https://archive.is") !== -1){
                       arr.push("is");
                     }
                     if(table.rows[r].cells[0].innerHTML.indexOf("https://archive.st") !== -1){
                       arr.push("st");
                     }
-                    if(table.rows[r].cells[0].innerHTML.indexOf("http://megalodon.jp") !== -1){
+                    if(table.rows[r].cells[0].innerHTML.indexOf("https://megalodon.jp") !== -1){
                       arr.push("mg");
                     }
-                    if(table.rows[r].cells[0].innerHTML.indexOf("http://www.webcitation.org") !== -1){
+                    if(table.rows[r].cells[0].innerHTML.indexOf("https://www.webcitation.org") !== -1){
                       arr.push("wc");
                     }
-                    if(table.rows[r].cells[0].innerHTML.indexOf("http://perma.cc") !== -1){
+                    if(table.rows[r].cells[0].innerHTML.indexOf("https://perma.cc") !== -1){
                       arr.push("cc");
                     }
             }
@@ -311,7 +311,7 @@ input[type=submit] {
                                   var row=table.insertRow(-1);
                                   var cell1=row.insertCell(0);
                                   var cell2=row.insertCell(1);
-                                  cell1.innerHTML='<a href="http://archive.org" target="_blank"> Internet Archive </a>'
+                                  cell1.innerHTML='<a href="https://archive.org" target="_blank"> Internet Archive </a>'
                                   cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
                                   document.getElementById('results').style.opacity = 1
                                   document.getElementById('img1').style.opacity = 0
@@ -339,7 +339,7 @@ input[type=submit] {
                                   var row=table.insertRow(-1);
                                   var cell1=row.insertCell(0);
                                   var cell2=row.insertCell(1);
-                                  cell1.innerHTML='<a href="http://archive.is" target="_blank"> Archive.is </a>'
+                                  cell1.innerHTML='<a href="https://archive.is" target="_blank"> Archive.is </a>'
                                   cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
                                   document.getElementById('results').style.opacity = 1
                                   document.getElementById('img2').style.opacity = 0
@@ -367,7 +367,7 @@ input[type=submit] {
                                   var row=table.insertRow(-1);
                                   var cell1=row.insertCell(0);
                                   var cell2=row.insertCell(1);
-                                  cell1.innerHTML='<a href="http://www.webcitation.org" target="_blank"> WebCite </a>'
+                                  cell1.innerHTML='<a href="https://www.webcitation.org" target="_blank"> WebCite </a>'
                                   cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
                                   document.getElementById('results').style.opacity = 1
                                   document.getElementById('img3').style.opacity = 0
@@ -423,7 +423,7 @@ input[type=submit] {
                                   var row=table.insertRow(-1);
                                   var cell1=row.insertCell(0);
                                   var cell2=row.insertCell(1);
-                                  cell1.innerHTML='<a href="http://megalodon.jp" target="_blank"> Megalodon.jp </a>'
+                                  cell1.innerHTML='<a href="https://megalodon.jp" target="_blank"> Megalodon.jp </a>'
                                   cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
                                   document.getElementById('results').style.opacity = 1
                                   document.getElementById('img6').style.opacity = 0
@@ -451,7 +451,7 @@ input[type=submit] {
                                   var row=table.insertRow(-1);
                                   var cell1=row.insertCell(0);
                                   var cell2=row.insertCell(1);
-                                  cell1.innerHTML='<a href="http://perma.cc" target="_blank"> Perma.cc </a>'
+                                  cell1.innerHTML='<a href="https://perma.cc" target="_blank"> Perma.cc </a>'
                                   cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
                                   document.getElementById('results').style.opacity = 1
                                   document.getElementById('img4').style.opacity = 0
