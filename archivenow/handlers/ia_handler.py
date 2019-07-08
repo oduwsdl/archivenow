@@ -23,10 +23,10 @@ class IA_handler(object):
                         return "https://web.archive.org"+r.headers["Content-Location"]
                     else:
                         try:
-                            uri_from_content = "https://web.archive.org" + r.content.split('var redirUrl = "',1)[1].split('"',1)[0]
+                            uri_from_content = "https://web.archive.org" + r.text.split('var redirUrl = "',1)[1].split('"',1)[0]
                         except:
                             uri_from_content = r.headers["Content-Location"]
-                            pass;
+                            #pass;
                         return uri_from_content
                 else:
                     for r2 in r.history:
