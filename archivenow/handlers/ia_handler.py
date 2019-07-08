@@ -19,7 +19,15 @@ class IA_handler(object):
                 if "Location" in r.headers:
                     return r.headers["Location"]
                 elif "Content-Location" in r.headers:
-                    return "https://web.archive.org"+r.headers["Content-Location"]    
+                    if (r.headers["Content-Location"]).startswith("/web/"):
+                        return "https://web.archive.org"+r.headers["Content-Location"]
+                    else:
+                        try:
+                            uri_from_content = "https://web.archive.org" + r.content.split('var redirUrl = "',1)[1].split('"',1)[0]
+                        except:
+                            uri_from_content = r.headers["Content-Location"]
+                            pass;
+                        return uri_from_content
                 else:
                     for r2 in r.history:
                         if 'Location' in r2.headers:
