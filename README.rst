@@ -257,7 +257,7 @@ To save the web page (www.foxnews.com) in The WebCite Archive:
       ['http://www.webcitation.org/6o9LTiDz3']
 
 Example 10
-~~~~~~~~~
+~~~~~~~~~~
 
 To save the web page (www.foxnews.com) in all configured archives:
 
