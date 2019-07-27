@@ -6,7 +6,7 @@ import requests
 class WC_handler(object):
 
     def __init__(self):
-        self.enabled = True
+        self.enabled = False
         self.name = 'The WebCite Archive'
         self.api_required = False 
 
