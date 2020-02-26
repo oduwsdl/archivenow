@@ -320,3 +320,27 @@ The Internet Archive (IA) sets a time gap of at least two minutes between creati
 For example, if you send a request to IA to capture (www.cnn.com) at 10:00pm, IA will create a new copy (*C*) of this URI. IA will then return *C* for all requests to the archive for this URI received until 10:02pm. Using this same submission procedure for Archive.is requires a time gap of five minutes.  
 
 .. _handler files: https://github.com/oduwsdl/archivenow/tree/master/archivenow/handlers
+
+
+Citing Project
+--------------
+
+.. code-block:: latex
+
+      @INPROCEEDINGS{archivenow-jcdl2018,
+        AUTHOR    = {Mohamed Aturban and
+                     Mat Kelly and
+                     Sawood Alam and
+                     John A. Berlin and
+                     Michael L. Nelson and
+                     Michele C. Weigle},
+        TITLE     = {{ArchiveNow}: Simplified, Extensible, Multi-Archive Preservation},
+        BOOKTITLE = {Proceedings of the 18th ACM/IEEE-CS Joint Conference on Digital Libraries},
+        SERIES    = {JCDL '18},
+        PAGES     = {321--322},
+        MONTH     = {June},
+        YEAR      = {2018},
+        ADDRESS   = {Fort Worth, Texas, USA},
+        URL       = {https://doi.org/10.1145/3197026.3203880},
+        DOI       = {10.1145/3197026.3203880}
+      }
