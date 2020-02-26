@@ -335,8 +335,8 @@ Citing Project
                      Michael L. Nelson and
                      Michele C. Weigle},
         TITLE     = {{ArchiveNow}: Simplified, Extensible, Multi-Archive Preservation},
-        BOOKTITLE = {Proceedings of the 18th ACM/IEEE-CS Joint Conference on Digital Libraries},
-        SERIES    = {JCDL '18},
+        BOOKTITLE = {Proceedings of the 18th {ACM/IEEE-CS} Joint Conference on Digital Libraries},
+        SERIES    = {{JCDL} '18},
         PAGES     = {321--322},
         MONTH     = {June},
         YEAR      = {2018},
