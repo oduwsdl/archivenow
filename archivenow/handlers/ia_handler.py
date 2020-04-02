@@ -11,8 +11,9 @@ class IA_handler(object):
         msg = ''
         try:
             uri = 'https://web.archive.org/save/' + uri_org
+            archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"}
             # push into the archive
-            r = requests.get(uri, timeout=120, allow_redirects=True)
+            r = requests.get(uri, timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
             r.raise_for_status()
             # extract the link to the archived copy 
             if (r != None):
