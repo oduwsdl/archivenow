@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine3.10
 LABEL maintainer "Mohamed Aturban <mohsci1@yahoo.com>"
 
 WORKDIR /app
