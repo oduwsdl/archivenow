@@ -33,7 +33,7 @@ The latest development version containing changes not yet released can be instal
       $ pip install -r requirements.txt
       $ pip install ./
 
-CLI USAGE
+CLI USAGE 
 ---------
 Usage of sub-commands in **archivenow** can be accessed through providing the `-h` or `--help` flag, like any of the below.
 
