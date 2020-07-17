@@ -8,7 +8,7 @@ class IS_handler(object):
         self.name = 'The Archive.is'
         self.api_required = False 
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
 
         from_heroku = False
         if 'from_heroku' in p_args:
@@ -38,7 +38,7 @@ class IS_handler(object):
                 msg = ''
 
                 archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
-                rid = requests.get('https://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+                rid = session.get('https://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
 
                 rid.raise_for_status()
                 htmldata = str(rid.content)
@@ -50,7 +50,7 @@ class IS_handler(object):
                     raise  
 
                 # push to the archive
-                r = requests.post('https://'+host+'/submit/', timeout=120,
+                r = session.post('https://'+host+'/submit/', timeout=120,
                                                                  data={"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId},
                                                                  allow_redirects=True,
                                                                  headers=archiveTodayUserAgent)          

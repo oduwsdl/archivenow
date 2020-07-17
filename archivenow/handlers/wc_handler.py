@@ -24,12 +24,12 @@ class WC_handler(object):
             return ''.join(random.choice(letters) for i in range(length))
         return [get_random_name(letters, length) + '@' + get_random_domain(domains) for i in range(nb)][0]
 
-    def page_exists_in_wc(self,urim):
+    def page_exists_in_wc(self, urim, session):
         try:
-            r = requests.get(urim, timeout=180, 
+            r = session.get(urim, timeout=180, 
                             allow_redirects=True)                  
 
-            r2 = requests.get('http://www.webcitation.org/mainframe.php', timeout=180, cookies=r.cookies,
+            r2 = session.get('http://www.webcitation.org/mainframe.php', timeout=180, cookies=r.cookies,
                             allow_redirects=True)  
 
             if ("When WebCite tried to archive the page, it received a Page Not Found error" in r2.text):   
@@ -41,11 +41,11 @@ class WC_handler(object):
         return False        
 
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
         msg = ''
         try:
             # push to the archive
-            r = requests.post('http://www.webcitation.org/archive', timeout=180, 
+            r = session.post('http://www.webcitation.org/archive', timeout=180, 
                                                                     data={'url':uri_org, 'email':self.generate_random_email()}, 
                                                                     allow_redirects=True)
             r.raise_for_status()
@@ -58,7 +58,7 @@ class WC_handler(object):
                    msg = "IndexError (" + self.name+ "): unable to extract a URL to the archived version from the response "
                    raise  
             # check if the page is archived 
-            if not self.page_exists_in_wc(urim):
+            if not self.page_exists_in_wc(urim, session):
                 msg = "Error (" + self.name+ "): " + " Received a Page Not Found error from the website concerned"
             else:
                 return str(urim)                                            

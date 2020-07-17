@@ -7,13 +7,14 @@ class IA_handler(object):
         self.name = 'The Internet Archive'
         self.api_required = False
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
         msg = ''
         try:
             uri = 'https://web.archive.org/save/' + uri_org
-            archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"}
+            # archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"}
             # push into the archive
-            r = requests.get(uri, timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+            # r = session.get(uri, timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+            r = session.get(uri, timeout=120, allow_redirects=True)
             r.raise_for_status()
             # extract the link to the archived copy 
             if (r != None):
@@ -41,5 +42,5 @@ class IA_handler(object):
         except Exception as e:
             if msg == '':
                 msg = "Error (" + self.name+ "): " + str(e)
-            pass;      
+            pass
         return msg

@@ -9,7 +9,7 @@ class WARC_handler(object):
         self.name = 'Generate WARC file'
         self.api_required = False
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
         msg = ''
         if p_args['agent'] == 'squidwarc':
             # squidwarc

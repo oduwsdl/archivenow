@@ -8,13 +8,13 @@ class CC_handler(object):
         self.name = 'The Perma.cc Archive'
         self.api_required = True
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
         msg = ''
         try:
 
             APIKEY = p_args['cc_api_key']
 
-            r = requests.post('https://api.perma.cc/v1/archives/?api_key='+APIKEY, timeout=120,
+            r = session.post('https://api.perma.cc/v1/archives/?api_key='+APIKEY, timeout=120,
                                                            data=json.dumps({"url":uri_org}),
                                                            headers={'Content-type': 'application/json'},
                                                            allow_redirects=True)       
