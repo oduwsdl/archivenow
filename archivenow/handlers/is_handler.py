@@ -33,12 +33,18 @@ class IS_handler(object):
 
         for host in archive_is_domains:
 
+            rid = None
+
             try:
 
                 msg = ''
 
                 archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
-                rid = session.get('https://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+                
+                if 'user-agent' in session.headers:
+                    rid = session.get('https://'+host+'/',timeout=120, allow_redirects=True)
+                else:
+                    rid = session.get('https://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
 
                 rid.raise_for_status()
                 htmldata = str(rid.content)
@@ -49,11 +55,11 @@ class IS_handler(object):
                     msg = "IndexError (" + self.name+ "): unable to extract 'submitid' "
                     raise  
 
-                # push to the archive
+                # push to the archive         
                 r = session.post('https://'+host+'/submit/', timeout=120,
                                                                  data={"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId},
-                                                                 allow_redirects=True,
-                                                                 headers=archiveTodayUserAgent)          
+                                                                 allow_redirects=True)
+
                 r.raise_for_status()
                 # extract the link to the archived copy
                 if 'Refresh' in r.headers:
@@ -71,6 +77,11 @@ class IS_handler(object):
                                 return r2.headers['Location']
                 msg = "Error ("+self.name+ "): No HTTP Location/Refresh header is returned in the response" 
             except Exception as e:
+                # if rid is not None:
+                #     print("rid: {}".format(rid))
+                #     print("rid request headers: {}".format(rid.request.headers))
+                #     print("rid response headers: {}".format(rid.headers))
+
                 if msg == '':
                     msg = "Error (" + self.name+ "): " + str(e)
                     pass;

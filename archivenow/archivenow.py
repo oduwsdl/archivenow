@@ -121,7 +121,7 @@ res_uris = {}
 def push_proxy(hdlr, URIproxy, p_args_proxy, res_uris_idx, session=requests.Session()):
     global res_uris
     try:
-        res = hdlr.push( URIproxy , p_args_proxy)
+        res = hdlr.push( URIproxy , p_args_proxy, session=session)
         print ( res )
         res_uris[res_uris_idx].append(res)
     except:
@@ -151,7 +151,11 @@ def push(URI, arc_id, p_args={}, session=requests.Session()):
             ### if (arc_id == handler): ### and (handlers[handler].api_required):
                 #res.append(handlers[handler].push(str(URI), p_args))
                 #push_proxy( handlers[handler], str(URI), p_args, res_uris_idx)
-                threads.append(Thread(target=push_proxy, args=(handlers[handler], str(URI), p_args, res_uris_idx, session,)))
+                threads.append(
+                    Thread(
+                        target=push_proxy, 
+                        args=(handlers[handler], str(URI), p_args, res_uris_idx, ), 
+                        kwargs={'session': session}))
                 ### elif (arc_id == handler):
                     ### res.append(handlers[handler].push(str(URI)))
 

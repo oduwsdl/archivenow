@@ -14,6 +14,8 @@ class IA_handler(object):
             # archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"}
             # push into the archive
             # r = session.get(uri, timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
+            print("session: {}".format(session))
+
             r = session.get(uri, timeout=120, allow_redirects=True)
             r.raise_for_status()
             # extract the link to the archived copy 
