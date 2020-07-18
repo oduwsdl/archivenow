@@ -39,9 +39,11 @@ class IS_handler(object):
 
                 msg = ''
 
-                archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)" , "host": host}
-                
-                if 'user-agent' in session.headers:
+                archiveTodayUserAgent = {
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
+                    "host": host}
+
+                if ('user-agent' in session.headers) and (not session.headers['User-Agent'].lower().startswith('python-requests/')):
                     rid = session.get('https://'+host+'/',timeout=120, allow_redirects=True)
                 else:
                     rid = session.get('https://'+host+'/',timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
@@ -55,10 +57,17 @@ class IS_handler(object):
                     msg = "IndexError (" + self.name+ "): unable to extract 'submitid' "
                     raise  
 
-                # push to the archive         
-                r = session.post('https://'+host+'/submit/', timeout=120,
+                # push to the archive
+                if ('user-agent' in session.headers) and (not session.headers['User-Agent'].lower().startswith('python-requests/')):
+                    r = session.post('https://'+host+'/submit/', timeout=120,
                                                                  data={"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId},
                                                                  allow_redirects=True)
+                else:
+                    r = session.post('https://'+host+'/submit/', timeout=120,
+                                                                 data={"anyway":"1" , "url":uri_org, "submitid":archiveTodaySubmitId},
+                                                                 allow_redirects=True,
+                                                                 headers=archiveTodayUserAgent)
+
 
                 r.raise_for_status()
                 # extract the link to the archived copy

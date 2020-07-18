@@ -11,11 +11,13 @@ class IA_handler(object):
         msg = ''
         try:
             uri = 'https://web.archive.org/save/' + uri_org
-            archiveTodayUserAgent = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64)"}
+            archiveTodayUserAgent = {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"
+            }
             # push into the archive
             # r = session.get(uri, timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
 
-            if 'user-agent' in session.headers:
+            if ('user-agent' in session.headers) and (not session.headers['User-Agent'].lower().startswith('python-requests/')):
                 r = session.get(uri, timeout=120, allow_redirects=True)
             else:
                 r = session.get(uri, timeout=120, allow_redirects=True, headers=archiveTodayUserAgent)
