@@ -8,6 +8,7 @@ import json
 import importlib
 import argparse
 import string
+import requests
 from threading import Thread
 from flask import request, Flask, jsonify, render_template
 from pathlib import Path
@@ -117,16 +118,16 @@ def pushit(path):
 res_uris = {}
 
 
-def push_proxy(hdlr, URIproxy, p_args_proxy, res_uris_idx):
+def push_proxy(hdlr, URIproxy, p_args_proxy, res_uris_idx, session=requests.Session()):
     global res_uris
     try:
-        res = hdlr.push( URIproxy , p_args_proxy)
+        res = hdlr.push( URIproxy , p_args_proxy, session=session)
         print ( res )
         res_uris[res_uris_idx].append(res)
     except:
-        pass;
+        pass
 
-def push(URI, arc_id, p_args={}):
+def push(URI, arc_id, p_args={}, session=requests.Session()):
     global handlers
     global res_uris
     try:
@@ -150,7 +151,11 @@ def push(URI, arc_id, p_args={}):
             ### if (arc_id == handler): ### and (handlers[handler].api_required):
                 #res.append(handlers[handler].push(str(URI), p_args))
                 #push_proxy( handlers[handler], str(URI), p_args, res_uris_idx)
-                threads.append(Thread(target=push_proxy, args=(handlers[handler],str(URI), p_args, res_uris_idx,)))
+                threads.append(
+                    Thread(
+                        target=push_proxy, 
+                        args=(handlers[handler], str(URI), p_args, res_uris_idx, ), 
+                        kwargs={'session': session}))
                 ### elif (arc_id == handler):
                     ### res.append(handlers[handler].push(str(URI)))
 

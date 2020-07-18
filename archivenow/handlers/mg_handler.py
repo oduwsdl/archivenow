@@ -13,7 +13,7 @@ class MG_handler(object):
         self.name = 'Megalodon.jp'
         self.api_required = False
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
 
 
         pre_defined_errors = [     
@@ -52,7 +52,7 @@ class MG_handler(object):
 
             try:
 
-                r = requests.get('http://megalodon.jp/?url=' + uri_org,
+                r = session.get('http://megalodon.jp/?url=' + uri_org,
                                  headers=headers)
                 token = r.text.split('"token" value="',
                                              1)[1].split('"',1)[0]
@@ -66,7 +66,7 @@ class MG_handler(object):
 
             if msg == '':
                 try:
-                    r2 = requests.post('https://megalodon.jp/pc/get_simple/decide',
+                    r2 = session.post('https://megalodon.jp/pc/get_simple/decide',
                                     data={"url":uri_org, "token":token},
                                     cookies=cookies, headers=headers,
                                     )

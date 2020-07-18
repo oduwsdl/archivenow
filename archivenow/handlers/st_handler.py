@@ -16,12 +16,12 @@ class ST_handler(object):
         self.name = 'The Archive.st'
         self.api_required = False
 
-    def push(self, uri_org, p_args=[]):
+    def push(self, uri_org, p_args=[], session=requests.Session()):
         msg = ''
 
         try:
             post_data = {"url": uri_org}
-            r = requests.post("https://archive.st/archive.php",
+            r = session.post("https://archive.st/archive.php",
                               data=post_data, headers=headers)
 
             page = str(r.content)
