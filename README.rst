@@ -40,7 +40,7 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 .. code-block:: bash
 
       $ archivenow -h
-      usage: archivenow.py [-h] [--mg] [--wc] [--cc] [--cc_api_key [CC_API_KEY]]
+      usage: archivenow.py [-h] [--mg] [--cc] [--cc_api_key [CC_API_KEY]]
                            [--is] [--st] [--ia] [--warc [WARC]] [-v] [--all]
                            [--server] [--host [HOST]] [--agent [AGENT]]
                            [--port [PORT]]
@@ -52,7 +52,6 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
       optional arguments:
         -h, --help            show this help message and exit
         --mg                  Use Megalodon.jp
-        --wc                  Use The WebCite Archive
         --cc                  Use The Perma.cc Archive
         --cc_api_key [CC_API_KEY]
                               An API KEY is required by The Perma.cc Archive
@@ -245,16 +244,6 @@ Python Usage
 .. code-block:: bash
    
     >>> from archivenow import archivenow
-    
-Example 9
-~~~~~~~~~
-
-To save the web page (www.foxnews.com) in The WebCite Archive:
-
-.. code-block:: bash
-
-      >>> archivenow.push("www.foxnews.com","wc")
-      ['http://www.webcitation.org/6o9LTiDz3']
 
 Example 10
 ~~~~~~~~~~
