@@ -26,7 +26,7 @@ class ST_handler(object):
 
             page = str(r.content)
 
-            if page in "<div class='alert'>The Captcha is invalid. Please try again.</div>":
+            if "<div class='alert'>The Captcha is invalid. Please try again.</div>" in page:
                 raise ValueError('The Captcha is invalid.')
 
             results = r_url.findall(page)
