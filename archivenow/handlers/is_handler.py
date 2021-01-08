@@ -45,7 +45,7 @@ class IS_handler(object):
                 nextSaveButton.click()
 
             except TimeoutException:
-                print("Error")
+                continue
 
             # The page takes a while to archive, so keep checking if the loading page is still displayed.
             loading = True
@@ -77,6 +77,15 @@ class IS_handler(object):
 
 
         '''
+        ---------------------------------------
+
+        This is the old is_handler.py implementation. The handler needed to be
+        redone with Selenium (https://selenium-python.readthedocs.io/) in order
+        to avoid encountering a Captcha.
+
+        ---------------------------------------
+
+
         from_heroku = False
         if 'from_heroku' in p_args:
             from_heroku = p_args['from_heroku']
