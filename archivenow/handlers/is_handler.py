@@ -45,7 +45,7 @@ class IS_handler(object):
                 nextSaveButton.click()
 
             except TimeoutException:
-                continue
+                pass
 
             # The page takes a while to archive, so keep checking if the loading page is still displayed.
             loading = True

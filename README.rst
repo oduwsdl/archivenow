@@ -58,7 +58,6 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
         --cc_api_key [CC_API_KEY]
                               An API KEY is required by The Perma.cc Archive
         --is                  Use The Archive.is
-        --st                  Use The Archive.st
         --ia                  Use The Internet Archive
         --warc [WARC]         Generate WARC file
         -v, --version         Report the version of archivenow
@@ -116,8 +115,6 @@ To save the web page (https://nypost.com/) in all configured web archives. In ad
       https://perma.cc/53CC-5ST8
       https://web.archive.org/web/20181002081445/https://nypost.com/
       https://megalodon.jp/2018-1002-1714-24/https://nypost.com:443/
-      http://www.webcitation.org/72ramyxT2
-      https://Archive.st/archive/2018/10/nypost.com/h5m1/nypost.com/index.html
       https_nypost.com__96ec2300.warc
 
 Example 5
@@ -183,7 +180,6 @@ To save the web page (www.foxnews.com) in all configured archives though the web
               "Error (The Perma.cc Archive): An API Key is required ", 
               "http://archive.is/ukads", 
               "https://web.archive.org/web/20181002082007/http://www.foxnews.com", 
-              "http://Archive.st/ikxq", 
               "Error (Megalodon.jp): We can not obtain this page because the time limit has been reached or for technical ... ", 
               "http://www.webcitation.org/72rbKsX8B"
             ]

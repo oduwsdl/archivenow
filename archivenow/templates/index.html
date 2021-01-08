@@ -162,7 +162,6 @@ input[type=submit] {
     <div id="choices2">
     <input type="checkbox" id="choice-archive1" checked > Internet Archive <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img1" id="img1"> <br>
     <input type="checkbox" id="choice-archive2" checked > Archive.is       <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img2" id="img2"> <br>
-    <input type="checkbox" id="choice-archive5" > Archive.st <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img5" id="img5"> <br>
     <input type="checkbox" id="choice-archive6" checked > Megalodon.jp <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img6" id="img6"> <br>
     <input type="checkbox" id="choice-archive4" > Perma.cc                 <img src={{ url_for('static', filename = "ajax-loader.gif") }} class="img4" id="img4">
     <div class="reveal-if-active">
@@ -261,9 +260,6 @@ input[type=submit] {
                     if(table.rows[r].cells[0].innerHTML.indexOf("https://archive.is") !== -1){
                       arr.push("is");
                     }
-                    if(table.rows[r].cells[0].innerHTML.indexOf("https://archive.st") !== -1){
-                      arr.push("st");
-                    }
                     if(table.rows[r].cells[0].innerHTML.indexOf("https://megalodon.jp") !== -1){
                       arr.push("mg");
                     }
@@ -350,34 +346,6 @@ input[type=submit] {
                       });
                   }
               localStorage.setItem("check_archive_2", true);
-            }
-            if (document.getElementById('choice-archive5').checked == true){
-                  
-                  selected_archives = selected_archives + 1;
-                  
-                  if(arr.indexOf("st") == -1){
-                      document.getElementById('img5').style.opacity = 1
-                      $.ajax({
-                          type: "GET",
-                          url: "st/"+document.getElementById('text_url').value,
-                          success: function(json) {
-                              if (validateURL(json['results'][0]) == true){
-                                  var table=document.getElementById("results");
-                                  var row=table.insertRow(-1);
-                                  var cell1=row.insertCell(0);
-                                  var cell2=row.insertCell(1);
-                                  cell1.innerHTML='<a href="https://archive.st/" target="_blank"> Archive.st </a>'
-                                  cell2.innerHTML='<a href="'+json['results'][0]+'" target="_blank"> '+json['results'][0]+' </a>'
-                                  document.getElementById('results').style.opacity = 1
-                                  document.getElementById('img5').style.opacity = 0
-                              }
-                          },
-                          complete: function(){
-                            document.getElementById('img5').style.opacity = 0
-                          }
-                      });
-                  }
-                  localStorage.setItem("check_archive_5", true);
             }
             if (document.getElementById('choice-archive6').checked == true){
                   
