@@ -32,6 +32,8 @@ The latest development version containing changes not yet released can be instal
       $ cd archivenow
       $ pip install -r requirements.txt
       $ pip install ./
+      
+In order to push to `archive.today <https://archive.vn/>`_, **archivenow** must use `Selenium <https://selenium-python.readthedocs.io/>`_, which has already been added to the requirements.txt. However, Selenium additionally needs a driver to interface with the chosen browser. It is recommended to use Selenium and ArchiveNow with Firefox and its corresponding `GeckoDriver <https://github.com/mozilla/geckodriver/releases>`_. After installing the driver, you can push to `archive.today <https://archive.vn/>`_ from **archivenow**.
 
 CLI USAGE 
 ---------
