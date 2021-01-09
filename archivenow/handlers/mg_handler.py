@@ -1,7 +1,14 @@
 # encoding: utf-8
 import os
 import requests
-
+import time
+from selenium.webdriver.firefox.options import Options
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 
 new_header = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
@@ -17,7 +24,52 @@ class MG_handler(object):
 
     def push(self, uri_org, p_args=[], session=requests.Session()):
 
+        driver = webdriver.Firefox()
+        driver.get("https://megalodon.jp/?url=" + uri_org)
 
+        #time.sleep(400)
+
+        try:
+            addButton = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[9]/form/div[1]/input[2]")
+
+            addButton.click() # Click the add button
+        except :
+            print("Cannot complete request right now.")
+            raise
+
+
+        stillOnPage = True
+        while stillOnPage:
+            try:
+                button = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[1]/div/h3")
+
+            except:
+                stillOnPage = False
+
+            try:
+                error = driver.find_element_by_xpath("/html/body/div[2]/div[2]/div[3]/div/a/h3")
+                print("Cannot complete request right now.")
+                raise
+
+            except:
+                pass
+
+        # The page takes a while to archive, so keep checking if the loading page is still displayed.
+        loading = True
+        while loading:
+            try:
+                loadingPage = driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/a/img")
+                loading = False
+
+            except:
+                loading = True
+
+        # After the loading screen is gone and the page is archived, the current URL
+        # will be the URL to the archived page.
+        print(driver.current_url)
+
+
+        '''
         pre_defined_errors = [     
             {
                 "We could not acquire this web page because it exceeded the maximum available size ( 30 MB ).":
@@ -54,13 +106,23 @@ class MG_handler(object):
 
             try:
 
-                r = session.get('http://megalodon.jp/?url=' + uri_org,
-                                 headers=headers)
-                token = r.text.split('"token" value="',
-                                             1)[1].split('"',1)[0]
+                print('https://megalodon.jp/?url=' + uri_org)
 
-                phpsessid = r.headers['Set-Cookie'].split('PHPSESSID=', 1)[1]
-                cookies = dict(PHPSESSID=phpsessid)
+                r = session.get('https://megalodon.jp/?url=' + uri_org)
+
+                print("GET worked")
+
+                print(r.text)
+
+                token = r.text.split("name=\"token\" id=\"cap-token\" value=\"", 1)[1]
+
+
+                print(token)
+
+                #phpsessid = r.headers['Set-Cookie'].split('PHPSESSID=', 1)[1]
+                #cookies = dict(PHPSESSID=phpsessid)
+
+                print("Other stuff worked")
 
             except Exception as e:
                 msg = "Error ({0}): {1}".format(self.name, str(e))
@@ -104,7 +166,9 @@ class MG_handler(object):
         except Exception as e:
             if not msg:
                 msg = "Error (" + self.name+ "): " + str(e)
-            pass;
+            pass
         if ('list index out of range' in msg) or ('referenced before assignment' in msg):
             msg = "Error (" + self.name+ "): " + "We can not obtain this page because the time limit has been reached or for technical ... "
         return msg
+
+        '''

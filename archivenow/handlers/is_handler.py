@@ -1,6 +1,7 @@
 import os
 import requests
 import sys
+import time
 from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -47,14 +48,17 @@ class IS_handler(object):
             except TimeoutException:
                 pass
 
+            time.sleep(1)
+
             # The page takes a while to archive, so keep checking if the loading page is still displayed.
             loading = True
             while loading:
                 try:
-                    loadingPage = driver.find_element_by_xpath("/html/body/div/img")
+                    loadingPage = driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/a/img")
+                    loading = False
 
                 except:
-                    loading = False
+                    loading = True
 
             # After the loading screen is gone and the page is archived, the current URL
             # will be the URL to the archived page.
