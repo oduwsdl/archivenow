@@ -3,7 +3,11 @@ Archive Now (archivenow)
 A Tool To Push Web Resources Into Web Archives
 ----------------------------------------------
 
-Archive Now (**archivenow**) currently is configured to push resources into six public web archives. You can easily add more archives by writing a new archive handler (e.g., myarchive_handler.py) and place it inside the folder "handlers".
+Archive Now (**archivenow**) currently is configured to push resources into four public web archives. You can easily add more archives by writing a new archive handler (e.g., myarchive_handler.py) and place it inside the folder "handlers". 
+
+Update January 2021
+~~~~~~~~~
+Originally, **archivenow** was configured to push to 6 different public web archives. The two removed web archives are `WebCite <https://www.webcitation.org/>`_ and `archive.st <http://archive.st/>`_. WebCite was removed from **archivenow** as they are no longer accepting archiving requests. Archive.st was removed from **archivenow** due to encountering a Captcha when attempting to push to the archive. In addition to removing those 2 archives, the method for pushing to 2 other archives from **archivenow** has been updated. In order to push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_, `Selenium <https://selenium-python.readthedocs.io/>`_ is used.
 
 As explained below, this library can be used through:
 
@@ -33,7 +37,7 @@ The latest development version containing changes not yet released can be instal
       $ pip install -r requirements.txt
       $ pip install ./
       
-In order to push to `archive.today <https://archive.vn/>`_, **archivenow** must use `Selenium <https://selenium-python.readthedocs.io/>`_, which has already been added to the requirements.txt. However, Selenium additionally needs a driver to interface with the chosen browser. It is recommended to use Selenium and ArchiveNow with Firefox and its corresponding `GeckoDriver <https://github.com/mozilla/geckodriver/releases>`_. After installing the driver, you can push to `archive.today <https://archive.vn/>`_ from **archivenow**.
+In order to push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_, **archivenow** must use `Selenium <https://selenium-python.readthedocs.io/>`_, which has already been added to the requirements.txt. However, Selenium additionally needs a driver to interface with the chosen browser. It is recommended to use Selenium and **archivenow** with Firefox and Firefox's corresponding `GeckoDriver <https://github.com/mozilla/geckodriver/releases>`_. After installing the driver, you can push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_ from **archivenow**.
 
 CLI USAGE 
 ---------
@@ -243,7 +247,7 @@ Python Usage
    
     >>> from archivenow import archivenow
 
-Example 10
+Example 9
 ~~~~~~~~~~
 
 To save the web page (www.foxnews.com) in all configured archives:
@@ -253,7 +257,7 @@ To save the web page (www.foxnews.com) in all configured archives:
       >>> archivenow.push("www.foxnews.com","all")
       ['https://web.archive.org/web/20170209145930/http://www.foxnews.com','http://archive.is/oAjuM','http://www.webcitation.org/6o9LcQoVV','Error (The Perma.cc Archive): An API KEY is required]
 
-Example 11
+Example 10
 ~~~~~~~~~~
 
 To save the web page (www.foxnews.com) in The Perma.cc:
@@ -263,7 +267,7 @@ To save the web page (www.foxnews.com) in The Perma.cc:
       >>> archivenow.push("www.foxnews.com","cc",{"cc_api_key":"$YOUR-Perma-cc-API-KEY"})
       ['https://perma.cc/8YYC-C7RM']
       
-Example 12
+Example 11
 ~~~~~~~~~~
 
 To start the server from Python do the following. The server/port number can be passed (e.g, start(port=1111, host='localhost')):
