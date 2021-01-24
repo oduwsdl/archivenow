@@ -7,7 +7,7 @@ Archive Now (**archivenow**) currently is configured to push resources into four
 
 Update January 2021
 ~~~~~~~~~
-Originally, **archivenow** was configured to push to 6 different public web archives. The two removed web archives are `WebCite <https://www.webcitation.org/>`_ and `archive.st <http://archive.st/>`_. WebCite was removed from **archivenow** as they are no longer accepting archiving requests. Archive.st was removed from **archivenow** due to encountering a Captcha when attempting to push to the archive. In addition to removing those 2 archives, the method for pushing to 2 other archives from **archivenow** has been updated. In order to push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_, `Selenium <https://selenium-python.readthedocs.io/>`_ is used.
+Originally, **archivenow** was configured to push to 6 different public web archives. The two removed web archives are `WebCite <https://www.webcitation.org/>`_ and `archive.st <http://archive.st/>`_. WebCite was removed from **archivenow** as they are no longer accepting archiving requests. Archive.st was removed from **archivenow** due to encountering a Captcha when attempting to push to the archive. In addition to removing those 2 archives, the method for pushing to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_ from **archivenow** has been updated. In order to push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_, `Selenium <https://selenium-python.readthedocs.io/>`_ is used.
 
 As explained below, this library can be used through:
 
@@ -47,7 +47,7 @@ Usage of sub-commands in **archivenow** can be accessed through providing the `-
 
       $ archivenow -h
       usage: archivenow.py [-h] [--mg] [--cc] [--cc_api_key [CC_API_KEY]]
-                           [--is] [--st] [--ia] [--warc [WARC]] [-v] [--all]
+                           [--is] [--ia] [--warc [WARC]] [-v] [--all]
                            [--server] [--host [HOST]] [--agent [AGENT]]
                            [--port [PORT]]
                            [URI]
