@@ -18,10 +18,6 @@
     <td>is</td>
   </tr>
   <tr>
-    <td>WebCite </td>
-    <td>wc</td>
-  </tr>
-  <tr>
     <td>Perma.cc</td>
     <td>cc</td>
   </tr>
