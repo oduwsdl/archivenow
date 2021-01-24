@@ -50,17 +50,13 @@ class IS_handler(object):
             # The page takes a while to archive, so keep checking if the loading page is still displayed.
             loading = True
             while loading:
-                try:
-                    loadingPage = driver.find_element_by_xpath("/html/body/div/img")
-
-                except:
+                
+                if not 'wip' in driver.current_url:
                     loading = False
 
             # After the loading screen is gone and the page is archived, the current URL
             # will be the URL to the archived page.
             print(driver.current_url)
-
-            msg = driver.current_url
 
             driver.quit()
 
