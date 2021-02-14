@@ -58,6 +58,8 @@ class IS_handler(object):
             # will be the URL to the archived page.
             print(driver.current_url)
 
+            msg = driver.current_url;
+
             driver.quit()
 
         except:
