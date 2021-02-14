@@ -37,7 +37,11 @@ The latest development version containing changes not yet released can be instal
       $ pip install -r requirements.txt
       $ pip install ./
       
-In order to push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_, **archivenow** must use `Selenium <https://selenium-python.readthedocs.io/>`_, which has already been added to the requirements.txt. However, Selenium additionally needs a driver to interface with the chosen browser. It is recommended to use Selenium and **archivenow** with Firefox and Firefox's corresponding `GeckoDriver <https://github.com/mozilla/geckodriver/releases>`_. After installing the driver, you can push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_ from **archivenow**.
+In order to push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_, **archivenow** must use `Selenium <https://selenium-python.readthedocs.io/>`_, which has already been added to the requirements.txt. However, Selenium additionally needs a driver to interface with the chosen browser. It is recommended to use Selenium and **archivenow** with `Firefox <https://www.mozilla.org/en-US/firefox/releases/>`_ and Firefox's corresponding `GeckoDriver <https://github.com/mozilla/geckodriver/releases>`_.
+
+You can download the latest versions of `Firefox <https://www.mozilla.org/en-US/firefox/releases/>`_ and the `GeckoDriver <https://github.com/mozilla/geckodriver/releases>`_ to use with **archivenow**.
+
+After installing the driver, you can push to `archive.today <https://archive.vn/>`_ and `megalodon.jp <https://megalodon.jp/>`_ from **archivenow**.
 
 CLI USAGE 
 ---------
