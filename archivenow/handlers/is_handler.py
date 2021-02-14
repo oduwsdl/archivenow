@@ -51,12 +51,12 @@ class IS_handler(object):
             loading = True
             while loading:
                 
-                if not 'wip' in driver.current_url:
+                if not 'wip' in driver.current_url and not 'submit' in driver.current_url:
                     loading = False
 
             # After the loading screen is gone and the page is archived, the current URL
             # will be the URL to the archived page.
-            print(driver.current_url)
+            msg = driver.current_url;
 
             driver.quit()
 
