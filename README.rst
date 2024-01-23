@@ -274,7 +274,7 @@ To save the web page (www.foxnews.com) in The Perma.cc:
 Example 11
 ~~~~~~~~~~
 
-To start the server from Python do the following. The server/port number can be passed (e.g, start(port=1111, host='localhost')):
+To start the server from Python do the following. The server/port number can be passed (e.g., start(port=1111, host='localhost')):
 
 .. code-block:: bash
 
