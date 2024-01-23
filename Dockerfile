@@ -1,4 +1,5 @@
-FROM python:3
+ARG PYTAG=latest
+FROM python:${PYTAG}
 LABEL maintainer "Mohamed Aturban <mohsci1@yahoo.com>"
 
 WORKDIR /app
