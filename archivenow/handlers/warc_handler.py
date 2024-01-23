@@ -9,9 +9,9 @@ class WARC_handler(object):
         self.name = 'Generate WARC file'
         self.api_required = False
 
-    def push(self, uri_org, p_args=[], session=requests.Session()):
+    def push(self, uri_org, p_args={}, session=requests.Session()):
         msg = ''
-        if p_args['agent'] == 'squidwarc':
+        if 'agent' in p_args and p_args['agent'] == 'squidwarc':
             # squidwarc
             #if not distutils.spawn.find_executable("squidwarc"):
             #    return 'wget is not installed!'
@@ -22,7 +22,6 @@ class WARC_handler(object):
                 return p_args['warc']+'.warc'
             else:
                 return 'squidwarc failed to generate the WARC file'
-
         else:
             if not distutils.spawn.find_executable("wget"):
                 return 'wget is not installed!'
